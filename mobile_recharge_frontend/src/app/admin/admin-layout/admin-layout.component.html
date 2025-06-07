@@ -1,0 +1,101 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-sm">
+  <div class="container-fluid">
+    <a class="navbar-brand mb-0 h1" href="#">Welcome Admin</a>
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item">
+        <a
+          class="nav-link btn btn-outline-light btn-sm px-3 rounded-pill"
+          (click)="logout()"
+        >
+          <i class="fas fa-sign-out-alt me-2"></i>Logout
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="pt-5" style="background-color: #f8f9fa; min-height: 100vh">
+  <div class="container-fluid">
+    <div class="row">
+      <nav
+        class="col-md-3 col-lg-2 d-md-block bg-white sidebar shadow-sm rounded-3"
+      >
+        <div class="position-sticky pt-3">
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2">
+              <a
+                class="nav-link d-flex align-items-center px-3 py-2 rounded primary-hover-link"
+                routerLink="/admin/admin-dashboard"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+              >
+                <i class="fas fa-tachometer-alt me-2 sidebar-icon-purple"></i>
+                <span>Dashboard</span>
+              </a>
+            </li>
+            <li class="nav-item mb-2">
+              <a
+                class="nav-link d-flex align-items-center px-3 py-2 rounded"
+                routerLink="/admin/plans"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+              >
+                <i class="fas fa-list me-2 sidebar-icon-purple"></i>
+                <span>View Plans</span>
+              </a>
+            </li>
+            <li class="nav-item mb-2">
+              <a
+                class="nav-link d-flex align-items-center px-3 py-2 rounded"
+                routerLink="/admin/subscribers"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+              >
+                <i class="fas fa-users me-2 sidebar-icon-purple"></i>
+                <span>View Subscribers</span>
+              </a>
+            </li>
+            <li class="nav-item mb-2">
+              <a
+                class="nav-link d-flex align-items-center px-3 py-2 rounded"
+                routerLink="/admin/subscribers/add"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+              >
+                <i class="fas fa-user-plus me-2 sidebar-icon-purple"></i>
+                <span>Add Subscriber</span>
+              </a>
+            </li>
+            <li class="nav-item mb-2">
+              <a
+                class="nav-link d-flex align-items-center px-3 py-2 rounded"
+                routerLink="/admin/plans/create"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+              >
+                <i class="fas fa-plus me-2 sidebar-icon-purple"></i>
+                <span>Add New Plan</span>
+              </a>
+            </li>
+            <li class="nav-item mb-2">
+              <a
+                class="nav-link d-flex align-items-center px-3 py-2 rounded"
+                [routerLink]="['/admin/admin-dashboard']"
+                [queryParams]="{ tab: 'history' }"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+              >
+                <i class="fas fa-history me-2 sidebar-icon-purple"></i>
+                <span>Recharge History</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <main class="col-md-9 col-lg-10 px-md-4 py-3">
+        <router-outlet></router-outlet>
+      </main>
+    </div>
+  </div>
+</div>

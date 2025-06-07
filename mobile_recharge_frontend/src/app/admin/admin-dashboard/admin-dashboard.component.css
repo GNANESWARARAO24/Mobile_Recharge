@@ -1,0 +1,24 @@
+/* src/app/admin/admin-dashboard/admin-dashboard.component.scss */
+
+/* You can add component-specific styles here if needed */
+
+.card {
+  border-radius: 0.5rem; /* Slightly rounded corners for cards */
+}
+
+.table {
+  border-radius: 0.5rem;
+  overflow: hidden; /* Ensures rounded corners for table inside card */
+}
+
+/* Optional: Styles for active sidebar link, if not handled globally */
+/*
+.nav-link.active {
+  background-color: #e0f2f7; // Light blue background for active link
+  color: #007bff !important; // Blue text
+  font-weight: bold;
+}
+.nav-link.active i {
+  color: #007bff !important; // Ensure icon color also changes
+}
+*/

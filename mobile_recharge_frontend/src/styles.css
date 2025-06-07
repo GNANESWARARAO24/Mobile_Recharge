@@ -1,0 +1,27 @@
+/* Make sure body also takes full height */
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: none; /* Remove any default background */
+  font-family: Arial, sans-serif; /* Optional */
+}
+
+/* Optional: Ensure app-root or main wrapper also takes full height */
+app-root,
+#app-root,
+.layout-background {
+  height: 100%;
+  width: 100%;
+}
+.layout-background {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  background-image: url("/assets/images/sss.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  z-index: 0;
+}
