@@ -31,14 +31,19 @@
 
         <div class="mb-3">
           <label for="category" class="form-label text-muted">Category</label>
-          <input
-            type="text"
+          <select
             id="category"
             formControlName="category"
-            class="form-control form-control-lg"
-            placeholder="e.g., Prepaid, Postpaid, Fiber"
+            class="form-select form-select-lg"
             required
-          />
+          >
+            <option value="" disabled selected>Select a category</option>
+            <option value="Popular">Popular</option>
+            <option value="Validity">Validity</option>
+            <option value="Data">Data</option>
+            <option value="Unlimited">Unlimited</option>
+            <option value="Special">Special</option>
+          </select>
           <div
             *ngIf="
               addPlanForm.get('category')?.invalid &&
@@ -158,14 +163,6 @@
           {{ errorMessage }}
         </p>
       </form>
-      <!-- <div class="text-center mt-4">
-        <button
-          (click)="navigateToAdminDashboard()"
-          class="btn btn-link text-primary text-decoration-none"
-        >
-          Back to Admin Dashboard
-        </button> 
-      </div> -->
     </div>
   </div>
 </div>

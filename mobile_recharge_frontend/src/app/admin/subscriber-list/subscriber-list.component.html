@@ -36,16 +36,20 @@
               <th scope="col" class="text-nowrap">
                 <i class="fas fa-mobile-alt me-1"></i>Mobile Number
               </th>
-              <th scope="col"><i class="fas fa-user me-1"></i>Name</th>
+              <th scope="col" class="text-nowrap">
+                <i class="fas fa-user me-1"></i>Name
+              </th>
               <th scope="col"><i class="fas fa-envelope me-1"></i>Email</th>
-              <th scope="col"><i class="fas fa-box me-1"></i>Current Plan</th>
+              <th scope="col" class="text-nowrap">
+                <i class="fas fa-box me-1"></i>Current Plan
+              </th>
               <th scope="col" class="text-nowrap">
                 <i class="fas fa-calendar-alt me-1"></i>Created At
               </th>
               <th scope="col" class="text-nowrap">
                 <i class="fas fa-calendar-check me-1"></i>Plan Expiry
               </th>
-              <th scope="col" class="text-center">
+              <th scope="col" class="text-nowrap">
                 <i class="fas fa-chart-bar me-1"></i>Data Usage
               </th>
             </tr>
@@ -53,7 +57,7 @@
           <tbody>
             <tr *ngFor="let subscriber of subscribers">
               <td>{{ subscriber.mobileNumber }}</td>
-              <td>{{ subscriber.name }}</td>
+              <td class="text-nowrap">{{ subscriber.name }}</td>
               <td>{{ subscriber.email }}</td>
               <td>{{ subscriber.currentPlan.name }}</td>
               <td>{{ subscriber.createdAt | date : "shortDate" }}</td>
