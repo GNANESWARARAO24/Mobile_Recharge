@@ -1,38 +1,28 @@
-<div class="d-flex flex-column min-vh-100 pt-3">
-  <div class="flex-grow-1 d-flex align-items-center justify-content-center">
-    <div
-      class="row shadow-lg rounded-3 overflow-hidden"
-      style="max-width: 1000px; width: 100%"
-    >
-      <div
-        class="col-6 d-flex flex-column align-items-center justify-content-center p-4 bg-primary text-white"
-      >
-        <h3 class="text-center mb-3">Welcome!</h3>
-        <p class="text-center mb-0">
+<div class="main-layout-wrapper">
+  <div class="content-center-wrapper">
+    <div class="validation-card">
+      <div class="card-welcome-section">
+        <h3 class="welcome-heading">Welcome!</h3>
+        <p class="welcome-text">
           Please enter your mobile number to proceed with the validation.
         </p>
       </div>
 
-      <div class="col-6">
-        <div class="card card-body p-5">
-          <h2
-            class="text-center mb-4 text-dark d-flex align-items-center justify-content-center"
-          >
-            <i class="fas fa-mobile-alt me-2"></i>Validate Mobile Number
+      <div class="card-form-section">
+        <div class="card-body">
+          <h2 class="form-title">
+            <i class="fas fa-mobile-alt"></i>Validate Mobile Number
           </h2>
           <form [formGroup]="validationForm" (ngSubmit)="onSubmit()">
-            <div class="mb-3">
-              <label
-                for="mobileNumber"
-                class="form-label text-muted d-flex align-items-center"
-              >
-                <i class="fas fa-phone me-2"></i>Mobile Number
+            <div class="form-group-mb">
+              <label for="mobileNumber" class="form-label-icon">
+                <i class="fas fa-phone"></i>Mobile Number
               </label>
               <input
                 type="text"
                 formControlName="mobileNumber"
                 maxlength="10"
-                class="form-control form-control-lg rounded-pill"
+                class="form-input-pill"
                 id="mobileNumber"
                 required
               />
@@ -41,7 +31,7 @@
                   validationForm.get('mobileNumber')?.hasError('required') &&
                   validationForm.get('mobileNumber')?.touched
                 "
-                class="text-danger mt-1"
+                class="validation-error-message"
               >
                 Mobile number is required
               </div>
@@ -50,7 +40,7 @@
                   validationForm.get('mobileNumber')?.hasError('pattern') &&
                   validationForm.get('mobileNumber')?.touched
                 "
-                class="text-danger mt-1"
+                class="validation-error-message"
               >
                 Enter a valid 10-digit number
               </div>
@@ -58,11 +48,11 @@
             <button
               type="submit"
               [disabled]="validationForm.invalid"
-              class="btn btn-primary btn-lg rounded-pill w-100 shadow-sm"
+              class="form-submit-button"
             >
-              <i class="fas fa-check me-2"></i>Validate
+              <i class="fas fa-check"></i>Validate
             </button>
-            <p *ngIf="errorMessage" class="text-danger text-center mt-3">
+            <p *ngIf="errorMessage" class="error-message-center">
               {{ errorMessage }}
             </p>
           </form>
