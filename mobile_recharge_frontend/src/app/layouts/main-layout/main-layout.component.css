@@ -10,9 +10,15 @@
   display: flex;
   flex-direction: column;
 }
+/* Example CSS for the active link */
+.nav-link.active {
+  color: #fff; /* White text */
+  background-color: #007bff; /* Bootstrap primary blue */
+  border-radius: 0.25rem; /* Slightly rounded corners */
+}
 
 .navbar {
-  /* Set a specific height */
+  
   height: 60px; /* Adjust this value as needed for your desired height */
   min-height: 80px; /* Important to ensure it doesn't shrink */
 
@@ -21,8 +27,8 @@
   padding-bottom: 0;
 
   /* Bootstrap classes */
-  background-color: #ffffff !important; /* bg-dark equivalent */
-  color: #333; /* text color for elements inside navbar */
+  background-color: #333 !important; /* bg-dark equivalent */
+  color: #fff; /* text color for elements inside navbar */
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important; /* shadow-sm equivalent */
 }
 
@@ -31,7 +37,7 @@
   height: 100%; /* Make brand span full height of navbar */
   display: flex;
   align-items: center; /* Vertically center content */
-  color: #333 !important;
+  color: #fff !important;
   font-size: 1.5rem;
   transition: transform 0.2s ease-in-out;
 }
@@ -44,7 +50,7 @@
   height: 100%; /* Make nav links span full height of navbar */
   display: flex;
   align-items: center; /* Vertically center content */
-  color: #333 !important;
+  color: #fff !important;
   font-weight: 500;
   transition: color 0.3s ease, transform 0.3s ease;
   padding-left: 0.8rem;
@@ -78,8 +84,7 @@
   z-index: 1;
 }
 
-/* Adjust margin-top for main-content to clear the fixed-top navbar */
-/* This value should roughly match your navbar's new height + desired spacing */
+
 .main-content {
   margin-top: 80px; /* Match navbar height or add slightly more if needed */
 }
