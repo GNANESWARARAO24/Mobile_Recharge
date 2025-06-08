@@ -1,112 +1,127 @@
-/* validation-page.component.scss (for aesthetics only) */
 
-/* --- Main Content Wrapper (the combined Welcome + Form card) --- */
-.row.shadow-lg {
-  /* max-width and width are now in inline style in HTML, so remove from here if using that */
-  /* If you prefer it here, remove it from the inline style in HTML */
 
-  background-color: #ffffff;
-  border-radius: 1rem;
-  overflow: hidden;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.05);
+.main-layout-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-top: 1rem;
 }
 
-/* --- Welcome Section (Left Half - col-6) --- */
-.col-6.d-flex.flex-column.align-items-center.justify-content-center.p-4.bg-primary.text-white {
-  background: linear-gradient(45deg, #007bff 0%, #0056b3 100%) !important;
-  color: #ffffff;
-  padding: 3rem !important;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  position: relative;
-  z-index: 1;
-  border-top-left-radius: 1rem;
-  border-bottom-left-radius: 1rem;
-}
-
-.col-6.d-flex.flex-column.align-items-center.justify-content-center.p-4.bg-primary.text-white::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(
-    circle at top left,
-    rgba(255, 255, 255, 0.05) 0%,
-    transparent 70%
-  );
-  z-index: -1;
-  border-top-left-radius: 1rem;
-  border-bottom-left-radius: 1rem;
-}
-
-.col-6.bg-primary h3 {
-  font-size: 2.2rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-}
-
-.col-6.bg-primary p {
-  font-size: 1.1rem;
-  line-height: 1.6;
-}
-
-/* --- Validation Form Section (Right Half - col-6) --- */
-.row.shadow-lg > .col-6:last-child .card-body {
-  padding: 3.5rem !important;
-  border: none !important;
-  border-top-right-radius: 1rem;
-  border-bottom-right-radius: 1rem;
-}
-
-.card-body h2 {
-  color: #343a40 !important;
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 2.5rem;
+.content-center-wrapper {
+  flex-grow: 1;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.card-body h2 i.fas {
+.validation-card {
+  max-width: 1000px;
+  width: 100%;
+  display: flex; /* For the row-like behavior */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.05);
+  border-radius: 1rem;
+  overflow: hidden;
+  background-color: #ffffff;
+}
+
+.card-welcome-section {
+  flex: 0 0 50%; /* Equivalent of col-6 */
+  max-width: 50%; /* Equivalent of col-6 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem; /* p-4 equivalent was less, adjust as needed */
+  background: linear-gradient(45deg, #007bff 0%, #0056b3 100%);
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1;
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+  /* ... include the ::before pseudo-element styling here ... */
+}
+
+.welcome-heading {
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1rem; /* mb-3 equivalent */
+}
+
+.welcome-text {
+  text-align: center;
+  margin-bottom: 0; /* mb-0 equivalent */
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.card-form-section {
+  flex: 0 0 50%; /* Equivalent of col-6 */
+  max-width: 50%; /* Equivalent of col-6 */
+}
+
+.card-form-section .card-body {
+  padding: 2.5rem !important; /* p-5 equivalent */
+  border: none;
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+}
+
+.form-title {
+  color: #343a40;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2.5rem; /* mb-4 equivalent */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem; /* For spacing between icon and text */
+}
+
+.form-title i.fas {
   color: #007bff;
-  margin-right: 0.75rem;
+  margin-right: 0; /* Ensure no conflicting margin */
   font-size: 1.8rem;
 }
 
-.form-label {
-  color: #495057 !important;
+.form-group-mb {
+  margin-bottom: 1rem; /* mb-3 equivalent */
+}
+
+.form-label-icon {
+  color: #495057;
   font-weight: 600;
   margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
 }
 
-.form-label i.fas {
+.form-label-icon i.fas {
   color: #6c757d;
-  margin-right: 0.5rem;
+  margin-right: 0.5rem; /* me-2 equivalent */
 }
 
-.form-control.rounded-pill {
-  border-radius: 50rem !important;
-  padding: 0.9rem 1.5rem;
+.form-input-pill {
+  border-radius: 50rem !important; /* rounded-pill equivalent */
+  padding: 0.9rem 1.5rem; /* form-control-lg equivalent */
   font-size: 1.1rem;
   border: 1px solid #ced4da;
   transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  width: 100%; /* w-100 equivalent if needed */
 }
 
-.form-control.rounded-pill:focus {
-  border-color: #80bdff;
-  box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
-  outline: none;
-}
-
-.text-danger {
-  color: #dc3545 !important;
+.validation-error-message {
+  color: #dc3545; /* text-danger equivalent */
   font-size: 0.9rem;
-  margin-top: 0.5rem;
+  margin-top: 0.5rem; /* mt-1 equivalent */
 }
+/* In validation-page.component.scss */
 
-.btn.rounded-pill {
+.form-submit-button i.fas {
+  margin-right: 0.5rem; /* Adjust this value (e.g., 0.25rem, 0.5rem, 0.75rem) */
+}
+.form-submit-button {
   background: linear-gradient(45deg, #007bff 0%, #0056b3 100%);
   border: none;
   border-radius: 50rem !important;
@@ -117,20 +132,24 @@
   letter-spacing: 0.5px;
   transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
   box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+  width: 100%; /* w-100 equivalent */
 }
 
-.btn.rounded-pill:hover:not(:disabled) {
+.error-message-center {
+  color: #dc3545; /* text-danger equivalent */
+  text-align: center;
+  margin-top: 1rem; /* mt-3 equivalent */
+}
+
+/* Add hover/disabled states for buttons here as well */
+.form-submit-button:hover:not(:disabled) {
   background: linear-gradient(45deg, #0056b3 0%, #004085 100%);
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(0, 123, 255, 0.4);
 }
 
-.btn.rounded-pill:disabled {
+.form-submit-button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
   box-shadow: none;
-}
-
-form > div.mb-3:last-of-type {
-  margin-bottom: 1.5rem !important;
 }
