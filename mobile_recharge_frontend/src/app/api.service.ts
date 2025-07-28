@@ -22,43 +22,28 @@ import {
   providedIn: 'root',
 })
 export class ApiService {
-  // --- REMOVE THESE PLACEHOLDER METHODS ---
-  // getTotalPlans() {
-  //   throw new Error('Method not implemented.');
-  // }
-  // getTotalSubscribers() {
-  //   throw new Error('Method not implemented.');
-  // }
-  // --- END REMOVAL ---
-
-  private readonly apiUrl = 'http://localhost:8082/api'; // Check if this URL is correct
-  private token: string | null = null; // Changed to private as it's managed by setToken/getToken
+  private readonly apiUrl = 'http://localhost:8082/api';
+  private token: string | null = null;
 
   constructor(private http: HttpClient) {
     // Load token from localStorage on initialization
-    // It's better to explicitly call getToken() here to ensure consistency
     this.token = localStorage.getItem('token');
   }
 
   setToken(token: string): void {
     this.token = token;
     localStorage.setItem('token', token);
-    console.log('Stored token:', token); // Debug log
+    console.log('Stored token:', token);
   }
 
-  // Changed to private as it's an internal helper
   private getToken(): string | null {
-    // Always retrieve from localStorage to ensure it's up-to-date
-    // especially after a new browser session or tab
     return localStorage.getItem('token');
   }
 
-  // Added isLoggedIn for AuthGuard
   isLoggedIn(): boolean {
     return !!this.getToken();
   }
 
-  // Added logout for clearing token
   logout(): void {
     this.token = null;
     localStorage.removeItem('token');
@@ -67,15 +52,15 @@ export class ApiService {
 
   private getHeaders(): HttpHeaders {
     let headers = new HttpHeaders({
-      'Content-Type': 'application/json', // Default content type for most requests
+      'Content-Type': 'application/json',
     });
-    const token = this.getToken(); // Get token dynamically
+    const token = this.getToken();
     if (token) {
       headers = headers.set('Authorization', `Bearer ${token}`);
       console.log(
         'Sending Authorization header:',
         headers.get('Authorization')
-      ); // Debug log
+      );
     } else {
       console.warn('No token available for request');
     }
@@ -90,23 +75,31 @@ export class ApiService {
           if (!response.token) {
             throw new Error('No token received from server');
           }
-          console.log('Login response token:', response.token); // Debug log
-          return response.token; // Return raw token string
+          console.log('Login response token:', response.token);
+          return response.token;
         }),
-        catchError(this.handleError)
+
+        catchError((error) => this.handleError(error))
       );
   }
 
+  // validateMobile(request: MobileValidationRequest): Observable<Subscriber> {
+  //   return this.http
+  //     .post<Subscriber>(`${this.apiUrl}/auth/validate-mobile`, request)
+  //     .pipe(catchError((error) => this.handleError(error)));
+  // }
   validateMobile(request: MobileValidationRequest): Observable<Subscriber> {
     return this.http
-      .post<Subscriber>(`${this.apiUrl}/auth/validate-mobile`, request)
-      .pipe(catchError(this.handleError));
+      .post<Subscriber>(`${this.apiUrl}/auth/validate-mobile`, request, {
+        headers: this.getHeaders(),
+      })
+      .pipe(catchError((error) => this.handleError(error)));
   }
 
   getPlans(): Observable<Plan[]> {
     return this.http
       .get<Plan[]>(`${this.apiUrl}/user/plans`)
-      .pipe(catchError(this.handleError));
+      .pipe(catchError((error) => this.handleError(error)));
   }
 
   recharge(request: RechargeRequest): Observable<RechargeResponse> {
@@ -114,7 +107,7 @@ export class ApiService {
       .post<RechargeResponse>(`${this.apiUrl}/user/recharge`, request, {
         headers: this.getHeaders(),
       })
-      .pipe(catchError(this.handleError));
+      .pipe(catchError((error) => this.handleError(error)));
   }
 
   getExpiringSubscribers(): Observable<Subscriber[]> {
@@ -122,7 +115,7 @@ export class ApiService {
       .get<Subscriber[]>(`${this.apiUrl}/admin/subscribers/expiring`, {
         headers: this.getHeaders(),
       })
-      .pipe(catchError(this.handleError));
+      .pipe(catchError((error) => this.handleError(error)));
   }
 
   getRechargeHistory(mobileNumber: string): Observable<Recharge[]> {
@@ -131,7 +124,7 @@ export class ApiService {
         `${this.apiUrl}/admin/subscribers/${mobileNumber}/history`,
         { headers: this.getHeaders() }
       )
-      .pipe(catchError(this.handleError));
+      .pipe(catchError((error) => this.handleError(error)));
   }
 
   getAllSubscribersForAdmin(): Observable<Subscriber[]> {
@@ -139,31 +132,29 @@ export class ApiService {
       .get<Subscriber[]>(`${this.apiUrl}/admin/subscribers/all`, {
         headers: this.getHeaders(), // Include authorization headers
       })
-      .pipe(catchError(this.handleError));
+      .pipe(catchError((error) => this.handleError(error)));
   }
 
-  // --- Use this one for dashboard subscriber count ---
   getSubscribersCountForAdmin(): Observable<number> {
     return this.http
       .get<number>(`${this.apiUrl}/admin/subscribers/count`, {
         headers: this.getHeaders(),
       })
-      .pipe(catchError(this.handleError));
+      .pipe(catchError((error) => this.handleError(error)));
   }
 
   getAllPlansForAdmin(): Observable<Plan[]> {
     return this.http
       .get<Plan[]>(`${this.apiUrl}/admin/plans`, { headers: this.getHeaders() })
-      .pipe(catchError(this.handleError));
+      .pipe(catchError((error) => this.handleError(error)));
   }
 
-  // --- Use this one for dashboard plan count ---
   getPlanCountForAdmin(): Observable<number> {
     return this.http
       .get<number>(`${this.apiUrl}/admin/plans/count`, {
         headers: this.getHeaders(),
       })
-      .pipe(catchError(this.handleError));
+      .pipe(catchError((error) => this.handleError(error)));
   }
 
   getPlanByIdForAdmin(id: number): Observable<Plan> {
@@ -171,7 +162,7 @@ export class ApiService {
       .get<Plan>(`${this.apiUrl}/admin/plans/${id}`, {
         headers: this.getHeaders(),
       })
-      .pipe(catchError(this.handleError));
+      .pipe(catchError((error) => this.handleError(error)));
   }
 
   createPlan(planData: NewPlanRequest): Observable<Plan> {
@@ -179,7 +170,7 @@ export class ApiService {
       .post<Plan>(`${this.apiUrl}/admin/plans`, planData, {
         headers: this.getHeaders(),
       })
-      .pipe(catchError(this.handleError));
+      .pipe(catchError((error) => this.handleError(error)));
   }
 
   updatePlan(id: number, planData: UpdatePlanRequest): Observable<Plan> {
@@ -187,7 +178,7 @@ export class ApiService {
       .put<Plan>(`${this.apiUrl}/admin/plans/${id}`, planData, {
         headers: this.getHeaders(),
       })
-      .pipe(catchError(this.handleError));
+      .pipe(catchError((error) => this.handleError(error)));
   }
 
   deletePlan(id: number): Observable<void> {
@@ -195,7 +186,7 @@ export class ApiService {
       .delete<void>(`${this.apiUrl}/admin/plans/${id}`, {
         headers: this.getHeaders(),
       })
-      .pipe(catchError(this.handleError));
+      .pipe(catchError((error) => this.handleError(error)));
   }
 
   addSubscriber(subscriberData: Subscriber): Observable<Subscriber> {
@@ -203,18 +194,52 @@ export class ApiService {
       .post<Subscriber>(`${this.apiUrl}/admin/subscribers`, subscriberData, {
         headers: this.getHeaders(),
       })
-      .pipe(catchError(this.handleError));
+      .pipe(catchError((error) => this.handleError(error)));
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {
-    let errorMessage = 'An error occurred';
+    let errorMessage = 'An unknown error occurred!';
+
     if (error.error instanceof ErrorEvent) {
+      // Client-side or network error
       errorMessage = `Client-side error: ${error.error.message}`;
     } else {
-      errorMessage = error.error?.message || `Server error: ${error.status}`;
+      // Backend error (e.g., HTTP 401, 404, 500)
+      console.error(
+        `Backend returned code ${error.status}, body was:`,
+        error.error
+      );
+
+      // Check if the error.error is a string (like "Invalid credentials")
+      if (typeof error.error === 'string') {
+        errorMessage = error.error; // Use the raw string from the backend
+      }
+      // Check if it's an object with a 'message' property
+      else if (
+        error.error &&
+        typeof error.error === 'object' &&
+        'message' in error.error
+      ) {
+        errorMessage = (error.error as any).message; // Cast to any to access message property
+      }
+      // Check if it's an object with a 'error' property (common in Spring validation errors)
+      else if (
+        error.error &&
+        typeof error.error === 'object' &&
+        'error' in error.error
+      ) {
+        errorMessage = (error.error as any).error; // For cases like Spring's default error structure
+      }
+      // Fallback for other server errors (e.g., 500 with no specific message)
+      else {
+        errorMessage = `Server error: ${error.status} ${
+          error.statusText || ''
+        }`;
+      }
     }
+
     console.error('API error:', errorMessage);
-    return throwError(() => new Error(errorMessage));
+    return throwError(() => new Error(errorMessage)); // Re-throw with the extracted message
   }
 }
 

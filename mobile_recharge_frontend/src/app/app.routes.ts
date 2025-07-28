@@ -14,6 +14,7 @@ import { AddSubscriberComponent } from './admin/add-subscriber/add-subscriber.co
 import { SubscriberListComponent } from './admin/subscriber-list/subscriber-list.component';
 import { RechargeComponent } from './recharge/recharge.component'; // Assuming recharge is directly in app/
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component'; // Assuming layouts/main-layout/ is correct
+import { BlankLayoutComponent } from './layouts/blank-layout/blank-layout.component';
 
 // You will also need to import your AuthGuard here to protect the admin routes
 // import { AuthGuard } from './guards/auth.guard'; // <-- Uncomment/Add this line
@@ -28,16 +29,28 @@ export const routes: Routes = [
       { path: 'mobile-validation', component: MobileValidationComponent },
       // Consider if 'admin-login' should be here or outside MainLayout for simpler access
       { path: 'admin-login', component: AdminLoginComponent },
-      { path: 'recharge', component: RechargeComponent }, // Recharge component within main layout
+      // Recharge component within main layout
       // Add other user-facing routes here
+    ],
+  },
+  {
+    path: '',
+    component: BlankLayoutComponent,
+    children: [
+      {
+        path: 'categories',
+        loadComponent: () =>
+          import('./categories/categories.component').then(
+            (m) => m.CategoriesComponent
+          ),
+      },
+      { path: 'recharge', component: RechargeComponent },
     ],
   },
   // Admin section (with AdminLayoutComponent)
   {
     path: 'admin',
     component: AdminLayoutComponent,
-    // Add AuthGuard here to protect ALL admin routes
-    // <-- Uncomment this line once AuthGuard is ready and imported
     children: [
       // Optional: Make dashboard the default child of '/admin'
       { path: '', redirectTo: 'admin-dashboard', pathMatch: 'full' },

@@ -1,37 +1,49 @@
-
-
 .main-layout-wrapper {
+  position: absolute;
+  top: 65px; /* navbar height */
+  left: 0;
+  right: 0;
+  bottom: 40px; /* footer height */
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  padding-top: 1rem;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  box-sizing: border-box;
+  overflow-y: auto;
+  background: transparent;
 }
 
 .content-center-wrapper {
   flex-grow: 1;
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0;
+  gap: 1rem; /* spacing between icon and text */
 }
 
 .validation-card {
   max-width: 1000px;
   width: 100%;
-  display: flex; /* For the row-like behavior */
+  display: flex;
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.05);
   border-radius: 1rem;
   overflow: hidden;
   background-color: #ffffff;
+  min-height: unset;
 }
 
 .card-welcome-section {
-  flex: 0 0 50%; /* Equivalent of col-6 */
-  max-width: 50%; /* Equivalent of col-6 */
+  flex: 0 0 50%;
+  max-width: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 3rem; /* p-4 equivalent was less, adjust as needed */
+  padding: 3rem;
   background: linear-gradient(45deg, #007bff 0%, #0056b3 100%);
   color: #ffffff;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
@@ -39,54 +51,57 @@
   z-index: 1;
   border-top-left-radius: 1rem;
   border-bottom-left-radius: 1rem;
-  /* ... include the ::before pseudo-element styling here ... */
 }
 
 .welcome-heading {
   font-size: 2.2rem;
   font-weight: 700;
   text-align: center;
-  margin-bottom: 1rem; /* mb-3 equivalent */
+  margin-bottom: 1rem;
 }
 
 .welcome-text {
   text-align: center;
-  margin-bottom: 0; /* mb-0 equivalent */
+  margin-bottom: 0;
   font-size: 1.1rem;
   line-height: 1.6;
 }
 
 .card-form-section {
-  flex: 0 0 50%; /* Equivalent of col-6 */
-  max-width: 50%; /* Equivalent of col-6 */
+  flex: 0 0 50%;
+  max-width: 50%;
+  min-height: unset;
+  display: flex;
+  align-items: center;
 }
 
 .card-form-section .card-body {
-  padding: 2.5rem !important; /* p-5 equivalent */
+  padding: 2.5rem !important;
   border: none;
   border-top-right-radius: 1rem;
   border-bottom-right-radius: 1rem;
+  width: 100%;
 }
 
 .form-title {
   color: #343a40;
   font-size: 2rem;
   font-weight: 700;
-  margin-bottom: 2.5rem; /* mb-4 equivalent */
+  margin-bottom: 2.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem; /* For spacing between icon and text */
+  gap: 1rem;
 }
 
 .form-title i.fas {
   color: #007bff;
-  margin-right: 0; /* Ensure no conflicting margin */
+  margin-right: 0;
   font-size: 1.8rem;
 }
 
 .form-group-mb {
-  margin-bottom: 1rem; /* mb-3 equivalent */
+  margin-bottom: 1rem;
 }
 
 .form-label-icon {
@@ -99,28 +114,28 @@
 
 .form-label-icon i.fas {
   color: #6c757d;
-  margin-right: 0.5rem; /* me-2 equivalent */
+  margin-right: 0.5rem;
 }
 
 .form-input-pill {
-  border-radius: 50rem !important; /* rounded-pill equivalent */
-  padding: 0.9rem 1.5rem; /* form-control-lg equivalent */
+  border-radius: 50rem !important;
+  padding: 0.9rem 1.5rem;
   font-size: 1.1rem;
   border: 1px solid #ced4da;
   transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-  width: 100%; /* w-100 equivalent if needed */
+  width: 100%;
 }
 
 .validation-error-message {
-  color: #dc3545; /* text-danger equivalent */
+  color: #dc3545;
   font-size: 0.9rem;
-  margin-top: 0.5rem; /* mt-1 equivalent */
+  margin-top: 0.5rem;
 }
-/* In validation-page.component.scss */
 
 .form-submit-button i.fas {
-  margin-right: 0.5rem; /* Adjust this value (e.g., 0.25rem, 0.5rem, 0.75rem) */
+  margin-right: 0.5rem;
 }
+
 .form-submit-button {
   background: linear-gradient(45deg, #007bff 0%, #0056b3 100%);
   border: none;
@@ -132,16 +147,9 @@
   letter-spacing: 0.5px;
   transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
   box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
-  width: 100%; /* w-100 equivalent */
+  width: 100%;
 }
 
-.error-message-center {
-  color: #dc3545; /* text-danger equivalent */
-  text-align: center;
-  margin-top: 1rem; /* mt-3 equivalent */
-}
-
-/* Add hover/disabled states for buttons here as well */
 .form-submit-button:hover:not(:disabled) {
   background: linear-gradient(45deg, #0056b3 0%, #004085 100%);
   transform: translateY(-2px);
@@ -152,4 +160,38 @@
   opacity: 0.6;
   cursor: not-allowed;
   box-shadow: none;
+}
+
+.error-message-center {
+  color: #dc3545;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+@media (max-width: 991.98px) {
+  .main-layout-wrapper {
+    top: 56px;
+    bottom: 36px;
+  }
+
+  .validation-card {
+    flex-direction: column;
+  }
+
+  .card-welcome-section,
+  .card-form-section {
+    max-width: 100%;
+    flex: 1 1 100%;
+    border-radius: 0 !important;
+  }
+
+  .card-welcome-section {
+    border-top-left-radius: 0.75rem !important;
+    border-top-right-radius: 0.75rem !important;
+  }
+
+  .card-form-section {
+    border-bottom-left-radius: 0.75rem !important;
+    border-bottom-right-radius: 0.75rem !important;
+  }
 }

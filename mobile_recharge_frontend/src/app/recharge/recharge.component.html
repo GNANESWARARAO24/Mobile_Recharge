@@ -17,38 +17,26 @@
         </div>
       </div>
 
-      <form [formGroup]="rechargeForm" (ngSubmit)="onSubmit()">
-        <div class="mb-3">
-          <label
-            for="planId"
-            class="form-label text-muted d-flex align-items-center"
-          >
-            <i class="fas fa-list me-2 text-purple"></i>Choose a Plan
-          </label>
-          <select
-            id="planId"
-            formControlName="planId"
-            class="form-select form-select-lg"
-            required
-          >
-            <option value="" disabled selected>Select a plan</option>
-            <option *ngFor="let plan of plans" [value]="plan.id">
-              {{ plan.name }} - ₹{{ plan.price }} ({{ plan.validityDays }} days)
-            </option>
-          </select>
-          <div
-            *ngIf="
-              rechargeForm.get('planId')?.invalid &&
-              rechargeForm.get('planId')?.touched
-            "
-            class="text-danger mt-1 small"
-          >
-            <span *ngIf="rechargeForm.get('planId')?.hasError('required')"
-              >Plan is required.</span
-            >
+      <!-- Show selected plan details if available -->
+      <div class="mb-3" *ngIf="selectedPlan">
+        <label class="form-label text-muted d-flex align-items-center">
+          <i class="fas fa-list me-2 text-purple"></i>Selected Plan
+        </label>
+        <div class="card bg-light p-3 mb-2">
+          <div>
+            <strong>{{ selectedPlan.name }}</strong>
           </div>
+          <!-- <div>Category: {{ selectedPlan.category }}</div>
+          <div>Price: ₹{{ selectedPlan.price }}</div>
+          <div>Data: {{ selectedPlan.dataPerDay }}</div>
+          <div>Calls: {{ selectedPlan.calls }}</div>
+          <div>SMS: {{ selectedPlan.sms }}</div>
+          <div>Validity: {{ selectedPlan.validityDays }} days</div> -->
         </div>
+      </div>
 
+      <form [formGroup]="rechargeForm" (ngSubmit)="onSubmit()">
+        <input type="hidden" formControlName="subscriberId" />
         <div class="mb-4">
           <label
             for="paymentMethod"
@@ -220,7 +208,7 @@
 
         <button
           type="submit"
-          [disabled]="!isInitialized || !plans.length || rechargeForm.invalid"
+          [disabled]="!isInitialized || rechargeForm.invalid"
           class="btn btn-primary btn-lg w-100 d-flex align-items-center justify-content-center"
         >
           <i class="fas fa-paper-plane me-2"></i>Confirm Recharge

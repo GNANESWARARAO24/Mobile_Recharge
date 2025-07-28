@@ -88,3 +88,25 @@
 .main-content {
   margin-top: 80px; /* Match navbar height or add slightly more if needed */
 }
+
+/* Footer styles */
+.footer {
+  width: 100%;
+  background: #333;
+  color: #fff;
+  text-align: center;
+  padding: 1rem 0;
+  position: relative;
+  bottom: 0;
+  left: 0;
+  font-size: 1rem;
+  z-index: 10;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.04);
+}
+
+@media (min-width: 768px) {
+  .footer {
+    font-size: 1.1rem;
+    padding: 1.2rem 0;
+  }
+}
