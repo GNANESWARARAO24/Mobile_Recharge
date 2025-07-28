@@ -19,11 +19,8 @@ COPY src ./src
 # Package the application (skip tests for speed)
 RUN ./mvnw clean install -DskipTests
 
-# Copy the JAR file into the image
-COPY target/*.jar app.jar
-
-# Expose port (must match `server.port` in application.properties)
+# Expose port
 EXPOSE 8080
 
-# Start the app
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Start the app using the built JAR
+ENTRYPOINT ["java", "-jar", "target/mobile-recharge-1-0.0.1-SNAPSHOT.jar"]
