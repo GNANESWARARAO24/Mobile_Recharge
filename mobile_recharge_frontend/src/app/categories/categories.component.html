@@ -1,0 +1,49 @@
+<div class="container">
+  <!-- Search bar -->
+  <input
+    type="text"
+    [(ngModel)]="searchQuery"
+    (input)="filterPlans()"
+    placeholder="Search plans..."
+    class="search-input"
+  />
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <button
+      *ngFor="let tab of tabs"
+      (click)="selectTab(tab)"
+      [class.active]="selectedTab === tab"
+    >
+      {{ tab }}
+    </button>
+  </div>
+
+  <!-- Loading & error -->
+  <div *ngIf="loading" class="status">Loading plans...</div>
+  <div *ngIf="error" class="status error">{{ error }}</div>
+
+  <!-- Plan cards -->
+  <div class="plans" *ngIf="!loading && !error && filteredPlans.length > 0">
+    <div class="plan-card" *ngFor="let plan of filteredPlans">
+      <h3>{{ plan.name }}</h3>
+
+      <div class="plan-grid">
+        <p><strong>Price:</strong> ₹{{ plan.price }}</p>
+        <p><strong>Validity:</strong> {{ plan.validityDays }} days</p>
+        <p><strong>Data:</strong> {{ plan.dataPerDay }}</p>
+
+        <p><strong>Calls:</strong> {{ plan.calls }}</p>
+        <p><strong>SMS:</strong> {{ plan.sms }}</p>
+        <p></p>
+        <!-- optional blank for grid balance -->
+      </div>
+
+      <button (click)="onRecharge(plan)">Recharge</button>
+    </div>
+  </div>
+
+  <div *ngIf="!loading && !error && filteredPlans.length === 0" class="status">
+    No plans found for "{{ selectedTab }}".
+  </div>
+</div>
