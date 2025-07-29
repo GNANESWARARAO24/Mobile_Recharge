@@ -22,7 +22,7 @@ import {
   providedIn: 'root',
 })
 export class ApiService {
-  private readonly apiUrl = 'http://localhost:8082/api';
+  private readonly apiUrl = 'http://localhost:8080/api';
   private token: string | null = null;
 
   constructor(private http: HttpClient) {
