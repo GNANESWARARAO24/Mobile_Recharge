@@ -16,8 +16,6 @@ import { RechargeComponent } from './recharge/recharge.component'; // Assuming r
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component'; // Assuming layouts/main-layout/ is correct
 import { BlankLayoutComponent } from './layouts/blank-layout/blank-layout.component';
 
-
-
 export const routes: Routes = [
   // Routes for general user (with MainLayoutComponent)
   {

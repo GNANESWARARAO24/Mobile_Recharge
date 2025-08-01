@@ -43,7 +43,7 @@ public class SubscriberController {
 		return ResponseEntity.ok(count);
 	}
 
-	@PostMapping
+	@PostMapping("/add")
 	public ResponseEntity<Subscriber> addSubscriber(@Valid @RequestBody AddSubscriberRequest addSubscriberRequest) {
 		if (subscriberRepository.findByMobileNumber(addSubscriberRequest.getMobileNumber()) != null) {
 			return new ResponseEntity<>(HttpStatus.CONFLICT); // Mobile number already exists

@@ -187,9 +187,13 @@ export class ApiService {
 
   addSubscriber(subscriberData: Subscriber): Observable<Subscriber> {
     return this.http
-      .post<Subscriber>(`${this.apiUrl}/admin/subscribers`, subscriberData, {
-        headers: this.getHeaders(),
-      })
+      .post<Subscriber>(
+        `${this.apiUrl}/admin/subscribers/add`,
+        subscriberData,
+        {
+          headers: this.getHeaders(),
+        }
+      )
       .pipe(catchError((error) => this.handleError(error)));
   }
 
