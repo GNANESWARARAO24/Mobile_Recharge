@@ -16,8 +16,7 @@ import { RechargeComponent } from './recharge/recharge.component'; // Assuming r
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component'; // Assuming layouts/main-layout/ is correct
 import { BlankLayoutComponent } from './layouts/blank-layout/blank-layout.component';
 
-// You will also need to import your AuthGuard here to protect the admin routes
-// import { AuthGuard } from './guards/auth.guard'; // <-- Uncomment/Add this line
+
 
 export const routes: Routes = [
   // Routes for general user (with MainLayoutComponent)
