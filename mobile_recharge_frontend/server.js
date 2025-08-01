@@ -10,7 +10,7 @@ app.use(express.static(path.join(__dirname, "dist/mobile_recharge_frontend")));
 // Fallback to index.html for SPA routes
 app.get("*", (req, res) => {
   res.sendFile(
-    path.join(__dirname, "dist/mobile_recharge_frontend/index.html")
+    path.join(__dirname, "dist/mobile_recharge_frontend/browser/index.html")
   );
 });
 

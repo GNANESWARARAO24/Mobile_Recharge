@@ -22,7 +22,8 @@ import {
   providedIn: 'root',
 })
 export class ApiService {
-  private readonly apiUrl = 'http://localhost:8080/api';
+  private readonly apiUrl =
+    'https://mobilerecharge-production.up.railway.app/api';
   private token: string | null = null;
 
   constructor(private http: HttpClient) {
@@ -83,11 +84,6 @@ export class ApiService {
       );
   }
 
-  // validateMobile(request: MobileValidationRequest): Observable<Subscriber> {
-  //   return this.http
-  //     .post<Subscriber>(`${this.apiUrl}/auth/validate-mobile`, request)
-  //     .pipe(catchError((error) => this.handleError(error)));
-  // }
   validateMobile(request: MobileValidationRequest): Observable<Subscriber> {
     return this.http
       .post<Subscriber>(`${this.apiUrl}/auth/validate-mobile`, request, {
