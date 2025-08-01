@@ -20,7 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/admin/subscribers")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://frontend-production-4f97.up.railway.app")
 public class SubscriberController {
 	@Autowired
 	private SubscriberRepository subscriberRepository;

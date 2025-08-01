@@ -21,7 +21,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/user")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://frontend-production-4f97.up.railway.app")
 public class RechargeController {
 	@Autowired
 	private PlanRepository planRepository;

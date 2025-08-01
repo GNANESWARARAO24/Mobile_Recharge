@@ -23,7 +23,7 @@ import java.util.Date;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://frontend-production-4f97.up.railway.app")
 public class AuthController {
 	@Autowired
 	private AdminRepository adminRepository;
