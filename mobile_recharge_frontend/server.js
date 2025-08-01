@@ -4,16 +4,17 @@ const path = require("path");
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-// Serve static files from the dist directory
-app.use(express.static(path.join(__dirname, "dist/mobile_recharge_frontend")));
+// ✅ Replace the folder name with your actual build output folder
+const distPath = path.join(__dirname, "dist/mobile-recharge-frontend");
 
-// Fallback to index.html for SPA routes
+// ✅ Serve static Angular files
+app.use(express.static(distPath));
+
+// ✅ Redirect all routes to index.html (SPA fallback)
 app.get("*", (req, res) => {
-  res.sendFile(
-    path.join(__dirname, "dist/mobile_recharge_frontend/index.html")
-  );
+  res.sendFile(path.join(distPath, "index.html"));
 });
 
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`✅ Server running at http://localhost:${PORT}`);
 });
