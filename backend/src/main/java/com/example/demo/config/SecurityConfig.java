@@ -37,7 +37,6 @@ public class SecurityConfig {
     .requestMatchers("/api/auth/admin/register").authenticated()
     .requestMatchers("/api/admin/**").authenticated()
     .requestMatchers("/api/admin/subscribers/**").hasRole("ADMIN")
-
     .anyRequest().authenticated()
 )
             .headers(headers -> headers
