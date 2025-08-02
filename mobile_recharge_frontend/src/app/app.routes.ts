@@ -15,7 +15,6 @@ import { SubscriberListComponent } from './admin/subscriber-list/subscriber-list
 import { RechargeComponent } from './recharge/recharge.component'; // Assuming recharge is directly in app/
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component'; // Assuming layouts/main-layout/ is correct
 import { BlankLayoutComponent } from './layouts/blank-layout/blank-layout.component';
-import { AdminGuard } from './auth/auth.guard';
 
 export const routes: Routes = [
   // Routes for general user (with MainLayoutComponent)
@@ -49,7 +48,6 @@ export const routes: Routes = [
   {
     path: 'admin',
     component: AdminLayoutComponent,
-    canActivate: [AdminGuard],
     children: [
       // Optional: Make dashboard the default child of '/admin'
       { path: '', redirectTo: 'admin-dashboard', pathMatch: 'full' },
