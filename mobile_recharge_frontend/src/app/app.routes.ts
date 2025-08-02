@@ -15,6 +15,7 @@ import { SubscriberListComponent } from './admin/subscriber-list/subscriber-list
 import { RechargeComponent } from './recharge/recharge.component'; // Assuming recharge is directly in app/
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component'; // Assuming layouts/main-layout/ is correct
 import { BlankLayoutComponent } from './layouts/blank-layout/blank-layout.component';
+import { AuthGuard } from './auth/auth.guard';
 
 export const routes: Routes = [
   // Routes for general user (with MainLayoutComponent)
@@ -43,6 +44,7 @@ export const routes: Routes = [
       },
       { path: 'recharge', component: RechargeComponent },
     ],
+    canActivate: [AuthGuard],
   },
   // Admin section (with AdminLayoutComponent)
   {
@@ -63,6 +65,7 @@ export const routes: Routes = [
       // If 'recharge' is specifically an admin-initiated function in this layout
       // { path: 'recharge', component: RechargeComponent },
     ],
+    canActivate: [AuthGuard],
   },
   // Fallback for any unmatched routes - redirects to the default home path
   { path: '**', redirectTo: '', pathMatch: 'full' },
