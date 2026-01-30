@@ -1,0 +1,130 @@
+<div class="container py-4">
+  <div class="card shadow-lg mx-auto">
+    <div class="card-body p-4">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="card-title mb-0 text-dark fs-4">
+          <i class="fas fa-users me-2 text-primary"></i>All Subscribers
+        </h2>
+        <div>
+          <button
+            (click)="simulateDailyConsumption()"
+            class="btn btn-warning me-2 d-flex align-items-center"
+            title="Simulate daily data consumption for all subscribers"
+          >
+            <i class="fas fa-calendar-day me-2"></i>Simulate Daily Usage
+          </button>
+          <button
+            (click)="addSubscriber()"
+            class="btn btn-success d-flex align-items-center"
+          >
+            <i class="fas fa-user-plus me-2"></i>Add Subscriber
+          </button>
+        </div>
+      </div>
+
+      <div
+        *ngIf="errorMessage"
+        class="alert alert-danger text-center mb-4"
+        role="alert"
+      >
+        {{ errorMessage }}
+      </div>
+
+      <div
+        *ngIf="subscribers.length > 0; else noSubscribers"
+        class="table-responsive"
+      >
+        <table
+          class="table table-striped table-hover table-bordered caption-top"
+        >
+          <caption>
+            List of all active and inactive subscribers
+          </caption>
+          <thead>
+            <tr class="table-primary">
+              <th scope="col" class="text-nowrap">
+                <i class="fas fa-mobile-alt me-1"></i>Mobile Number
+              </th>
+              <th scope="col" class="text-nowrap">
+                <i class="fas fa-user me-1"></i>Name
+              </th>
+              <th scope="col"><i class="fas fa-envelope me-1"></i>Email</th>
+              <th scope="col" class="text-nowrap">
+                <i class="fas fa-box me-1"></i>Current Plan
+              </th>
+              <th scope="col" class="text-nowrap">
+                <i class="fas fa-calendar-alt me-1"></i>Created At
+              </th>
+              <th scope="col" class="text-nowrap">
+                <i class="fas fa-calendar-check me-1"></i>Plan Expiry
+              </th>
+              <th scope="col" class="text-nowrap">
+                <i class="fas fa-chart-bar me-1"></i>Data Usage
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let subscriber of subscribers">
+              <td>{{ subscriber.mobileNumber }}</td>
+              <td class="text-nowrap">{{ subscriber.name }}</td>
+              <td>{{ subscriber.email }}</td>
+              <td>{{ subscriber.currentPlan.name }}</td>
+              <td>{{ subscriber.createdAt | date : "shortDate" }}</td>
+              <td>{{ subscriber.planExpiry | date : "shortDate" }}</td>
+              <td>
+                <div class="d-flex flex-column">
+                  <small class="text-muted mb-1">
+                    <input 
+                      type="number" 
+                      class="form-control form-control-sm" 
+                      style="width: 80px; display: inline-block;"
+                      [value]="subscriber.dataUsed"
+                      (change)="updateDataUsage(subscriber, $event)"
+                      [max]="subscriber.dataTotal"
+                      min="0"
+                      step="0.1"
+                    /> GB / {{ subscriber.dataTotal | number:'1.2-2' }} GB
+                  </small>
+                  <div class="progress" style="height: 8px;">
+                    <div 
+                      class="progress-bar" 
+                      [ngClass]="{
+                        'bg-success': getDataUsagePercent(subscriber) < 70,
+                        'bg-warning': getDataUsagePercent(subscriber) >= 70 && getDataUsagePercent(subscriber) < 90,
+                        'bg-danger': getDataUsagePercent(subscriber) >= 90
+                      }"
+                      [style.width.%]="getDataUsagePercent(subscriber)"
+                      role="progressbar"
+                      [attr.aria-valuenow]="getDataUsagePercent(subscriber)"
+                      aria-valuemin="0"
+                      aria-valuemax="100">
+                    </div>
+                  </div>
+                  <small class="text-muted mt-1">{{ getDataUsagePercent(subscriber) | number:'1.0-0' }}% used</small>
+                </div>
+              </td>
+              <!-- <td class="text-center text-nowrap">
+                <button (click)="viewSubscriber(subscriber.id)" class="btn btn-info btn-sm me-2" title="View Details">
+                  <i class="fas fa-eye"></i>
+                </button>
+                <button (click)="editSubscriber(subscriber.id)" class="btn btn-primary btn-sm me-2" title="Edit Subscriber">
+                  <i class="fas fa-edit"></i>
+                </button>
+                <button (click)="deleteSubscriber(subscriber.id)" class="btn btn-danger btn-sm" title="Delete Subscriber">
+                  <i class="fas fa-trash-alt"></i>
+                </button>
+              </td> -->
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <ng-template #noSubscribers>
+        <div class="alert alert-info text-center" role="alert">
+          <i class="fas fa-info-circle me-2"></i>No subscribers found. Get
+          started by adding a new one!
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

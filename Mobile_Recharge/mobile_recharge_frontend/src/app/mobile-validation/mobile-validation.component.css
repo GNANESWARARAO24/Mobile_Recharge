@@ -1,0 +1,203 @@
+/* validation-page.component.scss */
+
+.main-layout-wrapper {
+  position: absolute;
+  top: 65px; /* navbar height */
+  left: 0;
+  right: 0;
+  bottom: 40px; /* footer height */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: unset;
+  height: auto;
+  box-sizing: border-box;
+  overflow-y: auto;
+  background: transparent;
+}
+
+.content-center-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: unset;
+  padding: 0;
+}
+
+.validation-card {
+  max-width: 700px;
+  width: 100%;
+  display: flex;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background-color: #ffffff;
+  min-height: unset;
+}
+
+.card-welcome-section {
+  flex: 0 0 50%;
+  max-width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem;
+  background: linear-gradient(45deg, #007bff 0%, #0056b3 100%);
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1;
+  border-top-left-radius: 0.75rem;
+  border-bottom-left-radius: 0.75rem;
+  min-height: unset;
+}
+
+.welcome-heading {
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1rem; /* mb-3 equivalent */
+}
+
+.welcome-text {
+  text-align: center;
+  margin-bottom: 0; /* mb-0 equivalent */
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.card-form-section {
+  flex: 0 0 50%;
+  max-width: 50%;
+  min-height: unset;
+  display: flex;
+  align-items: center;
+}
+
+.card-form-section .card-body {
+  padding: 1.2rem !important;
+  border: none;
+  border-top-right-radius: 0.75rem;
+  border-bottom-right-radius: 0.75rem;
+  width: 100%;
+  min-height: unset;
+}
+@media (max-width: 991.98px) {
+  .main-layout-wrapper {
+    top: 56px;
+    bottom: 36px;
+  }
+  .validation-card {
+    flex-direction: column;
+    min-height: unset;
+  }
+  .card-welcome-section,
+  .card-form-section {
+    max-width: 100%;
+    flex: 1 1 100%;
+    min-height: unset;
+    border-radius: 0 !important;
+  }
+  .card-welcome-section {
+    border-top-left-radius: 0.75rem !important;
+    border-top-right-radius: 0.75rem !important;
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+  }
+  .card-form-section {
+    border-bottom-left-radius: 0.75rem !important;
+    border-bottom-right-radius: 0.75rem !important;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+  }
+}
+
+.form-title {
+  color: #343a40;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2.5rem; /* mb-4 equivalent */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem; /* For spacing between icon and text */
+}
+
+.form-title i.fas {
+  color: #007bff;
+  margin-right: 0; /* Ensure no conflicting margin */
+  font-size: 1.8rem;
+}
+
+.form-group-mb {
+  margin-bottom: 1rem; /* mb-3 equivalent */
+}
+
+.form-label-icon {
+  color: #495057;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.form-label-icon i.fas {
+  color: #6c757d;
+  margin-right: 0.5rem; /* me-2 equivalent */
+}
+
+.form-input-pill {
+  border-radius: 50rem !important; /* rounded-pill equivalent */
+  padding: 0.9rem 1.5rem; /* form-control-lg equivalent */
+  font-size: 1.1rem;
+  border: 1px solid #ced4da;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  width: 100%; /* w-100 equivalent if needed */
+}
+
+.validation-error-message {
+  color: #dc3545; /* text-danger equivalent */
+  font-size: 0.9rem;
+  margin-top: 0.5rem; /* mt-1 equivalent */
+}
+/* In validation-page.component.scss */
+
+.form-submit-button i.fas {
+  margin-right: 0.5rem; /* Adjust this value (e.g., 0.25rem, 0.5rem, 0.75rem) */
+}
+.form-submit-button {
+  background: linear-gradient(45deg, #007bff 0%, #0056b3 100%);
+  border: none;
+  border-radius: 50rem !important;
+  padding: 0.9rem 2rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.5px;
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+  width: 100%; /* w-100 equivalent */
+}
+
+.error-message-center {
+  color: #dc3545; /* text-danger equivalent */
+  text-align: center;
+  margin-top: 1rem; /* mt-3 equivalent */
+}
+
+/* Add hover/disabled states for buttons here as well */
+.form-submit-button:hover:not(:disabled) {
+  background: linear-gradient(45deg, #0056b3 0%, #004085 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 123, 255, 0.4);
+}
+
+.form-submit-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+}

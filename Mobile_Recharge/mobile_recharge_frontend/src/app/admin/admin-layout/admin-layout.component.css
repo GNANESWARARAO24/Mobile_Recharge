@@ -1,0 +1,125 @@
+/* src/app/admin/admin-layout/admin-layout.component.scss */
+
+.navbar {
+  z-index: 1030;
+}
+/* Add this CSS rule to your stylesheet */
+.sidebar-icon-purple {
+  color: #007bff !important; /* Your specific purple color */
+}
+
+/* Optional: You might want to change the color on hover/active for consistency */
+.nav-link:hover .sidebar-icon-purple,
+.nav-link.active .sidebar-icon-purple {
+  /* Example: make them a slightly darker purple or match the link text color */
+  color: #6a3ab2 !important; /* A slightly darker shade of purple */
+  /* Or if you want them to match the main link text color when active/hovered: */
+  /* color: inherit !important; */
+}
+
+.pt-5 {
+  padding-top: 56px !important;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  & > .container-fluid {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  & > .container-fluid > .row {
+    flex-grow: 1;
+    display: flex;
+  }
+}
+
+.sidebar {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 56px;
+  height: calc(100vh - 56px);
+  overflow-y: auto;
+  z-index: 1020;
+  background-color: #ffffff;
+  border-right: 1px solid #e9ecef;
+  padding-right: 0;
+  padding-left: 0;
+
+  @media (min-width: 768px) {
+  }
+
+  h6.sidebar-heading {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 0.5rem;
+    font-size: 0.75rem;
+    color: #6c757d;
+    border-bottom: 1px solid #e9ecef;
+    margin-bottom: 1rem;
+  }
+
+  .nav-item {
+    margin-bottom: 0.25rem;
+  }
+
+  .nav-link {
+    color: #343a40;
+    transition: background-color 0.2s ease, color 0.2s ease;
+
+    i {
+      width: 1.25rem;
+      text-align: center;
+    }
+
+    &:hover {
+      background-color: #f0f2f5;
+      color: #007bff;
+    }
+
+    &.active {
+      background-color: #e9ecef;
+      color: #007bff !important;
+      font-weight: bold;
+      border-left: 4px solid #007bff;
+      padding-left: calc(1rem - 4px);
+
+      i {
+        color: #007bff !important;
+      }
+    }
+  }
+}
+
+main.col-md-9 {
+  background-color: #f8f9fa;
+  flex-grow: 1;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+@media (max-width: 767.98px) {
+  .sidebar {
+    position: static;
+    height: auto;
+    margin-bottom: 1rem;
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #e9ecef;
+    padding-top: 0;
+  }
+
+  .pt-5 {
+    padding-top: 0 !important;
+  }
+
+  main.col-md-9 {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    margin-left: 0;
+  }
+}

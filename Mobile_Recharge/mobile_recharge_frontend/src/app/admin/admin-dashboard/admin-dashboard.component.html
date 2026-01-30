@@ -1,0 +1,239 @@
+<div
+  class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-4 border-bottom"
+>
+  <h1 class="h2">
+    <i class="fas fa-tachometer-alt me-2 text-primary"></i>Admin Dashboard
+  </h1>
+</div>
+
+<div class="row mb-4" *ngIf="activeTab === 'overview' || activeTab === 'history'">
+  <div class="col-md-6 mb-3 mb-md-0">
+    <div class="card h-100 p-3 d-flex flex-row align-items-center shadow-sm">
+      <i class="fas fa-list-alt text-success display-6 me-3"></i>
+      <div>
+        <div class="h4 mb-0 text-primary">
+          {{ planCount }}
+        </div>
+        <div class="text-muted">Total Plans</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 mb-3 mb-md-0">
+    <div class="card h-100 p-3 d-flex flex-row align-items-center shadow-sm">
+      <i class="fas fa-users text-success me-3 fa-2x"></i>
+      <div>
+        <div class="h4 mb-0 text-primary">
+          {{ subscribersCount }}
+        </div>
+        <div class="text-muted">Total Subscribers</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card p-3 mb-4 shadow-sm" *ngIf="activeTab === 'overview' || activeTab === 'expiring'">
+  <h3 class="h6 mb-3 text-muted d-flex align-items-center">
+    <i class="fas fa-hourglass-half me-2 text-warning"></i>Expiring Subscribers
+    (Next 30 Days)
+  </h3>
+  <div class="table-responsive">
+    <table class="table table-striped table-hover table-bordered">
+      <thead>
+        <tr class="table-light">
+          <th scope="col"><i class="fas fa-phone me-1"></i>Mobile Number</th>
+          <th scope="col"><i class="fas fa-user me-1"></i>Name</th>
+          <th scope="col">
+            <i class="fas fa-calendar-alt me-1"></i>Plan Expiry
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="expiringSubscribers.length === 0">
+          <td colspan="3" class="text-center text-muted">
+            No expiring subscribers found.
+          </td>
+        </tr>
+        <tr *ngFor="let subscriber of expiringSubscribers; let i = index">
+          <td>{{ subscriber.mobileNumber }}</td>
+          <td>{{ subscriber.name }}</td>
+          <td>{{ subscriber.planExpiry | date }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card p-3 mb-4 shadow-sm" *ngIf="activeTab === 'overview' || activeTab === 'history'">
+  <h3 class="h6 mb-3 text-muted d-flex align-items-center">
+    <i class="fas fa-history me-2 text-info"></i>Search Recharge History
+  </h3>
+  
+  <form [formGroup]="historyForm" (ngSubmit)="onHistorySubmit()" class="mb-4">
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <label for="mobileNumber" class="form-label d-flex align-items-center text-muted">
+          <i class="fas fa-mobile-alt me-2 text-info"></i>Mobile Number
+        </label>
+        <input
+          type="text"
+          class="form-control"
+          id="mobileNumber"
+          formControlName="mobileNumber"
+          maxlength="10"
+          placeholder="Enter 10-digit mobile number"
+        />
+        <div
+          *ngIf="historyForm.get('mobileNumber')?.hasError('required') && historyForm.get('mobileNumber')?.touched"
+          class="text-danger mt-1 small"
+        >
+          Mobile number is required.
+        </div>
+        <div
+          *ngIf="historyForm.get('mobileNumber')?.hasError('pattern') && historyForm.get('mobileNumber')?.touched"
+          class="text-danger mt-1 small"
+        >
+          Please enter a valid 10-digit number.
+        </div>
+      </div>
+      
+      <div class="col-md-3 mb-3">
+        <label for="startDate" class="form-label d-flex align-items-center text-muted">
+          <i class="fas fa-calendar me-2 text-info"></i>Start Date
+        </label>
+        <input
+          type="date"
+          class="form-control"
+          id="startDate"
+          formControlName="startDate"
+        />
+      </div>
+      
+      <div class="col-md-3 mb-3">
+        <label for="endDate" class="form-label d-flex align-items-center text-muted">
+          <i class="fas fa-calendar me-2 text-info"></i>End Date
+        </label>
+        <input
+          type="date"
+          class="form-control"
+          id="endDate"
+          formControlName="endDate"
+        />
+      </div>
+      
+      <div class="col-md-2 mb-3 d-flex align-items-end">
+        <button
+          type="submit"
+          class="btn btn-primary w-100"
+          [disabled]="historyForm.get('mobileNumber')?.invalid || isLoading"
+        >
+          <i class="fas fa-search me-2"></i>
+          <span *ngIf="!isLoading">Search</span>
+          <span *ngIf="isLoading">Loading...</span>
+        </button>
+      </div>
+    </div>
+    
+    <div class="d-flex gap-2" *ngIf="historyForm.get('startDate')?.value || historyForm.get('endDate')?.value">
+      <button type="button" class="btn btn-sm btn-outline-secondary" (click)="clearFilters()">
+        <i class="fas fa-times me-1"></i>Clear Filters
+      </button>
+    </div>
+  </form>
+
+  <!-- Statistics Summary -->
+  <div class="row mb-3" *ngIf="filteredHistory.length > 0">
+    <div class="col-md-4">
+      <div class="card bg-light p-2">
+        <small class="text-muted">Total Recharges</small>
+        <h5 class="mb-0">{{ totalRecharges }}</h5>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card bg-light p-2">
+        <small class="text-muted">Total Amount</small>
+        <h5 class="mb-0">₹{{ totalAmount }}</h5>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card bg-light p-2">
+        <small class="text-muted">Average Amount</small>
+        <h5 class="mb-0">₹{{ avgAmount | number:'1.2-2' }}</h5>
+      </div>
+    </div>
+  </div>
+
+  <!-- Export Button -->
+  <div class="d-flex justify-content-end mb-2" *ngIf="filteredHistory.length > 0">
+    <button class="btn btn-sm btn-success" (click)="exportToCSV()">
+      <i class="fas fa-download me-1"></i>Export to CSV
+    </button>
+  </div>
+
+  <!-- Results Table -->
+  <div class="table-responsive" *ngIf="filteredHistory.length > 0">
+    <table class="table table-striped table-hover table-bordered">
+      <thead>
+        <tr class="table-light">
+          <th scope="col" class="sortable" (click)="sortBy('plan')">
+            <i class="fas fa-list me-1"></i>Plan Name
+            <i class="fas fa-sort ms-1" *ngIf="sortColumn !== 'plan'"></i>
+            <i class="fas fa-sort-up ms-1" *ngIf="sortColumn === 'plan' && sortDirection === 'asc'"></i>
+            <i class="fas fa-sort-down ms-1" *ngIf="sortColumn === 'plan' && sortDirection === 'desc'"></i>
+          </th>
+          <th scope="col" class="sortable" (click)="sortBy('amount')">
+            <i class="fas fa-rupee-sign me-1"></i>Amount
+            <i class="fas fa-sort ms-1" *ngIf="sortColumn !== 'amount'"></i>
+            <i class="fas fa-sort-up ms-1" *ngIf="sortColumn === 'amount' && sortDirection === 'asc'"></i>
+            <i class="fas fa-sort-down ms-1" *ngIf="sortColumn === 'amount' && sortDirection === 'desc'"></i>
+          </th>
+          <th scope="col"><i class="fas fa-credit-card me-1"></i>Payment Method</th>
+          <th scope="col"><i class="fas fa-check-circle me-1"></i>Status</th>
+          <th scope="col" class="sortable" (click)="sortBy('rechargeDate')">
+            <i class="fas fa-calendar-alt me-1"></i>Recharge Date
+            <i class="fas fa-sort ms-1" *ngIf="sortColumn !== 'rechargeDate'"></i>
+            <i class="fas fa-sort-up ms-1" *ngIf="sortColumn === 'rechargeDate' && sortDirection === 'asc'"></i>
+            <i class="fas fa-sort-down ms-1" *ngIf="sortColumn === 'rechargeDate' && sortDirection === 'desc'"></i>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let recharge of filteredHistory; let i = index">
+          <td>{{ recharge.plan.name }}</td>
+          <td>₹{{ recharge.amount }}</td>
+          <td>
+            <span class="badge bg-info">{{ recharge.paymentMethod }}</span>
+          </td>
+          <td>
+            <span class="badge" [ngClass]="{
+              'bg-success': recharge.status === 'Success',
+              'bg-danger': recharge.status === 'Failed',
+              'bg-warning': recharge.status === 'Pending'
+            }">{{ recharge.status }}</span>
+          </td>
+          <td>{{ recharge.rechargeDate | date:'medium' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="text-center py-4">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <p class="mt-2 text-muted">Fetching recharge history...</p>
+  </div>
+  
+  <!-- Error Message -->
+  <p *ngIf="errorMessage" class="alert alert-danger text-center mt-4">
+    <i class="fas fa-exclamation-triangle me-2"></i>{{ errorMessage }}
+  </p>
+  
+  <!-- No Results -->
+  <p
+    *ngIf="!filteredHistory.length && historyForm.dirty && !errorMessage && !isLoading"
+    class="text-center text-muted mt-4"
+  >
+    <i class="fas fa-inbox me-2"></i>No history found for this mobile number.
+  </p>
+</div>

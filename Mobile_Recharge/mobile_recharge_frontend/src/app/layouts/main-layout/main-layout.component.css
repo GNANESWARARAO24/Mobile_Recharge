@@ -1,0 +1,113 @@
+/* Ensure the overall layout stretches */
+:host {
+  display: block;
+  height: 100%;
+}
+
+.layout-wrapper {
+  min-height: 100vh;
+  background: #fff; /* Example background */
+  display: flex;
+  flex-direction: column;
+}
+/* Example CSS for the active link */
+.nav-link.active {
+  color: #fff; /* White text */
+  background-color: #007bff; /* Bootstrap primary blue */
+  border-radius: 0.25rem; /* Slightly rounded corners */
+}
+
+.navbar {
+  /* Set a specific height */
+  height: 60px; /* Adjust this value as needed for your desired height */
+  min-height: 80px; /* Important to ensure it doesn't shrink */
+
+  /* Override Bootstrap's default padding to fit the new height */
+  padding-top: 0;
+  padding-bottom: 0;
+
+  /* Bootstrap classes */
+  background-color: #333 !important; /* bg-dark equivalent */
+  color: #fff; /* text color for elements inside navbar */
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important; /* shadow-sm equivalent */
+}
+
+/* Adjust brand and nav links to vertically center within the new height */
+.navbar-brand {
+  height: 100%; /* Make brand span full height of navbar */
+  display: flex;
+  align-items: center; /* Vertically center content */
+  color: #fff !important;
+  font-size: 1.5rem;
+  transition: transform 0.2s ease-in-out;
+}
+
+.navbar-brand:hover {
+  transform: scale(1.05);
+}
+
+.navbar-nav .nav-link {
+  height: 100%; /* Make nav links span full height of navbar */
+  display: flex;
+  align-items: center; /* Vertically center content */
+  color: #fff !important;
+  font-weight: 500;
+  transition: color 0.3s ease, transform 0.3s ease;
+  padding-left: 0.8rem;
+  padding-right: 0.8rem;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #864af9 !important;
+  transform: translateY(-2px);
+}
+
+/* Specific margin for the second nav-item on desktop */
+.navbar-nav .nav-item:nth-child(2) .nav-link {
+  margin-left: 1rem !important;
+}
+
+/* Hide the toggler button for desktop-only view */
+.navbar-toggler {
+  display: none;
+}
+
+.main-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 2rem !important;
+  padding-bottom: 2rem !important;
+  position: relative;
+  z-index: 1;
+}
+
+/* Adjust margin-top for main-content to clear the fixed-top navbar */
+/* This value should roughly match your navbar's new height + desired spacing */
+.main-content {
+  margin-top: 80px; /* Match navbar height or add slightly more if needed */
+}
+
+/* Footer styles */
+.footer {
+  width: 100%;
+  background: #333;
+  color: #fff;
+  text-align: center;
+  padding: 1rem 0;
+  position: relative;
+  bottom: 0;
+  left: 0;
+  font-size: 1rem;
+  z-index: 10;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.04);
+}
+
+@media (min-width: 768px) {
+  .footer {
+    font-size: 1.1rem;
+    padding: 1.2rem 0;
+  }
+}
