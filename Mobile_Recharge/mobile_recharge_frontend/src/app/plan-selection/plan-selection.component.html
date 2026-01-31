@@ -1,0 +1,55 @@
+<div class="plan-selection-wrapper">
+  <div class="container py-4">
+    <h2 class="main-title">
+      <i class="fas fa-list me-2"></i>Select Your Plan
+    </h2>
+
+    <div *ngIf="subscriber" class="subscriber-info">
+      <i class="fas fa-mobile-alt me-2"></i>
+      <span>Recharging for: <strong>{{ subscriber.mobileNumber }}</strong></span>
+    </div>
+
+    <div class="category-tabs">
+      <button 
+        *ngFor="let category of categories" 
+        (click)="filterPlansByCategory(category)"
+        [class.active]="selectedCategory === category"
+        class="category-btn"
+      >
+        {{ category }}
+      </button>
+    </div>
+
+    <div class="plans-grid" *ngIf="filteredPlans.length > 0">
+      <div *ngFor="let plan of filteredPlans" class="plan-card" (click)="selectPlan(plan.id)">
+        <div class="plan-header">
+          <h3>{{ plan.name }}</h3>
+          <div class="plan-price">₹{{ plan.price }}</div>
+        </div>
+        <div class="plan-details">
+          <div class="detail-item">
+            <i class="fas fa-calendar"></i>
+            <span>{{ plan.validityDays }} days</span>
+          </div>
+          <div class="detail-item">
+            <i class="fas fa-database"></i>
+            <span>{{ plan.dataPerDay }}</span>
+          </div>
+          <div class="detail-item">
+            <i class="fas fa-phone"></i>
+            <span>{{ plan.calls }}</span>
+          </div>
+        </div>
+        <button class="select-btn">
+          <i class="fas fa-arrow-right me-2"></i>Select & Pay
+        </button>
+      </div>
+    </div>
+
+    <div class="no-plans" *ngIf="filteredPlans.length === 0">
+      <i class="fas fa-inbox"></i>
+      <h3>No Plans Available</h3>
+      <p>No plans found in the {{ selectedCategory }} category. Please try another category.</p>
+    </div>
+  </div>
+</div>

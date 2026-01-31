@@ -1,76 +1,46 @@
 <div class="main-layout-wrapper">
   <div class="content-center-wrapper">
-    <div
-      class="card p-4 shadow-lg rounded-3"
-      style="max-width: 420px; width: 100%"
-    >
-      <h2
-        class="text-center mb-4 text-dark d-flex align-items-center justify-content-center"
-      >
-        <i class="fas fa-user-shield me-2" style="color: #007bff"></i>Admin
-        Login
+    <div class="login-card">
+      <h2 class="title">
+        <i class="fas fa-user-shield"></i>Admin Login
       </h2>
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="mb-3">
-          <label
-            for="username"
-            class="form-label text-muted d-flex align-items-center"
-          >
-            <i class="fas fa-user me-2"></i>Username
+          <label for="username" class="form-label">
+            <i class="fas fa-user"></i>Username
           </label>
           <input
             type="text"
             formControlName="username"
-            class="form-control form-control-lg rounded-pill"
+            class="form-control"
             id="username"
             placeholder="Enter username"
-            required
           />
-          <div
-            *ngIf="
-              loginForm.get('username')?.hasError('required') &&
-              loginForm.get('username')?.touched
-            "
-            class="text-danger mt-1"
-          >
+          <div *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched" class="error-text">
             Username is required
           </div>
         </div>
         <div class="mb-4">
-          <label
-            for="password"
-            class="form-label text-muted d-flex align-items-center"
-          >
-            <i class="fas fa-lock me-2"></i>Password
+          <label for="password" class="form-label">
+            <i class="fas fa-lock"></i>Password
           </label>
           <input
             type="password"
             formControlName="password"
-            class="form-control form-control-lg rounded-pill"
+            class="form-control"
             id="password"
             placeholder="Enter password"
-            required
           />
-          <div
-            *ngIf="
-              loginForm.get('password')?.hasError('required') &&
-              loginForm.get('password')?.touched
-            "
-            class="text-danger mt-1"
-          >
+          <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="error-text">
             Password is required
           </div>
         </div>
-        <button
-          type="submit"
-          [disabled]="loginForm.invalid"
-          class="btn btn-primary btn-lg rounded-pill w-100 shadow-sm"
-        >
-          <i class="fas fa-sign-in-alt me-2"></i>Login
+        <button type="submit" [disabled]="loginForm.invalid" class="btn-action">
+          <i class="fas fa-sign-in-alt"></i>Login
         </button>
-        <p *ngIf="errorMessage" class="text-danger text-center mt-3">
+        <div *ngIf="errorMessage" class="error-alert">
           {{ errorMessage }}
-        </p>
+        </div>
       </form>
     </div>
   </div>

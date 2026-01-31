@@ -1,0 +1,80 @@
+.user-layout {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0F0F12 0%, #1A1A1F 100%);
+}
+
+.user-navbar {
+  background: rgba(26, 26, 31, 0.95);
+  border-bottom: 2px solid rgba(225, 6, 0, 0.3);
+  padding: 1rem 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+}
+
+.welcome-text {
+  color: #FFFFFF;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+}
+
+.welcome-text i {
+  color: #E10600;
+  font-size: 1.5rem;
+}
+
+.welcome-text strong {
+  color: #E10600;
+}
+
+.logout-btn {
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #E10600 0%, #FF2E2E 100%);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(225, 6, 0, 0.3);
+}
+
+.logout-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(225, 6, 0, 0.5);
+}
+
+.user-content {
+  padding-top: 80px;
+  min-height: 100vh;
+}
+
+@media (max-width: 768px) {
+  .navbar-content {
+    flex-direction: row;
+    gap: 1rem;
+    padding: 0 1rem;
+  }
+
+  .welcome-text {
+    font-size: 0.9rem;
+  }
+
+  .logout-btn {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+}

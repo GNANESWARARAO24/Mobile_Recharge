@@ -12,8 +12,11 @@ import { CreatePlanComponent } from './admin/create-plan/create-plan.component';
 import { EditPlanComponent } from './admin/edit-plan/edit-plan.component';
 import { AddSubscriberComponent } from './admin/add-subscriber/add-subscriber.component';
 import { SubscriberListComponent } from './admin/subscriber-list/subscriber-list.component';
-import { RechargeComponent } from './recharge/recharge.component'; // Assuming recharge is directly in app/
+import { RechargeHistoryComponent } from './admin/recharge-history/recharge-history.component';
+import { PlanSelectionComponent } from './plan-selection/plan-selection.component';
+import { PaymentComponent } from './payment/payment.component';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component'; // Assuming layouts/main-layout/ is correct
+import { UserLayoutComponent } from './layouts/user-layout/user-layout.component';
 
 // You will also need to import your AuthGuard here to protect the admin routes
 // import { AuthGuard } from './guards/auth.guard'; // <-- Uncomment/Add this line
@@ -24,12 +27,19 @@ export const routes: Routes = [
     path: '',
     component: MainLayoutComponent,
     children: [
-      { path: '', redirectTo: 'mobile-validation', pathMatch: 'full' }, // Default route for main layout
+      { path: '', redirectTo: 'mobile-validation', pathMatch: 'full' },
       { path: 'mobile-validation', component: MobileValidationComponent },
-      // Consider if 'admin-login' should be here or outside MainLayout for simpler access
       { path: 'admin-login', component: AdminLoginComponent },
-      { path: 'recharge', component: RechargeComponent }, // Recharge component within main layout
-      // Add other user-facing routes here
+    ],
+  },
+  // User section (with UserLayoutComponent)
+  {
+    path: 'user',
+    component: UserLayoutComponent,
+    children: [
+      { path: '', redirectTo: 'plan-selection', pathMatch: 'full' },
+      { path: 'plan-selection', component: PlanSelectionComponent },
+      { path: 'payment', component: PaymentComponent },
     ],
   },
   // Admin section (with AdminLayoutComponent)
@@ -50,6 +60,7 @@ export const routes: Routes = [
       { path: 'plans/edit/:id', component: EditPlanComponent },
       { path: 'subscribers/add', component: AddSubscriberComponent },
       { path: 'subscribers', component: SubscriberListComponent },
+      { path: 'recharge-history', component: RechargeHistoryComponent },
       // If 'recharge' is specifically an admin-initiated function in this layout
       // { path: 'recharge', component: RechargeComponent },
     ],

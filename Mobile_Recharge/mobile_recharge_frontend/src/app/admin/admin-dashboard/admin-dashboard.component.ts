@@ -7,7 +7,7 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { ApiService } from '../../api.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -32,7 +32,8 @@ export class AdminDashboardComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private apiService: ApiService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -45,6 +46,13 @@ export class AdminDashboardComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.activeTab = params['tab'] || 'overview';
     });
+
+    const navigation = this.router.getCurrentNavigation();
+    if (navigation?.extras?.state?.['mobileNumber']) {
+      const mobileNumber = navigation.extras.state['mobileNumber'];
+      this.historyForm.patchValue({ mobileNumber });
+      this.onHistorySubmit();
+    }
 
     this.fetchDashboardSummary();
     this.fetchExpiringSubscribers();
@@ -172,5 +180,13 @@ export class AdminDashboardComponent implements OnInit {
       endDate: ''
     });
     this.onHistorySubmit();
+  }
+
+  navigateToPlans(): void {
+    this.router.navigate(['/admin/plans']);
+  }
+
+  navigateToSubscribers(): void {
+    this.router.navigate(['/admin/subscribers']);
   }
 }

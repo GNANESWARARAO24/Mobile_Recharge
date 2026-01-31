@@ -1,0 +1,258 @@
+:host {
+  display: block;
+  background: #0F0F12;
+  min-height: 100vh;
+  padding: 1rem;
+}
+
+.container {
+  background: transparent;
+  max-width: 100%;
+}
+
+.card {
+  background: #1A1A1F;
+  border: 1px solid #2A2A2A;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  color: #FFFFFF;
+}
+
+.card-body {
+  padding: 2rem;
+}
+
+.card-title, h2, h3, h4, h5 {
+  color: #FFFFFF !important;
+  font-weight: 700;
+}
+
+.text-indigo, .text-dark, .text-primary {
+  color: #E10600 !important;
+}
+
+.btn-outline-secondary {
+  border-color: #2A2A2A;
+  color: #B3B3B3;
+  background: transparent;
+  padding: 0.6rem 1.2rem;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.btn-outline-secondary:hover {
+  background: #2A2A2A;
+  color: #FFFFFF;
+  border-color: #2A2A2A;
+  transform: translateY(-1px);
+}
+
+.btn-primary {
+  background: #E10600;
+  border: none;
+  color: #FFFFFF;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  transition: all 0.3s;
+  box-shadow: 0 4px 12px rgba(225, 6, 0, 0.3);
+}
+
+.btn-primary:hover {
+  background: #FF2E2E;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 46, 46, 0.5);
+}
+
+.table-responsive {
+  margin-top: 1.5rem;
+}
+
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  color: #FFFFFF;
+}
+
+.table thead th {
+  background: transparent;
+  border: none;
+  padding: 1rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #B3B3B3;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.table thead th i {
+  color: #E10600;
+}
+
+.table tbody tr {
+  background: #1A1A1F;
+  transition: all 0.3s ease;
+}
+
+.table tbody tr:hover {
+  background: #1F1F24;
+  box-shadow: 0 4px 16px rgba(225, 6, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.table tbody td {
+  padding: 1.25rem 1rem;
+  border: none;
+  border-top: 8px solid #0F0F12;
+  background: inherit;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.table tbody tr:first-child td {
+  border-top: none;
+}
+
+.table tbody td:first-child {
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+.table tbody td:last-child {
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.table tbody td:nth-child(1) {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #FFFFFF;
+}
+
+.table tbody td:nth-child(2) {
+  color: #B3B3B3;
+}
+
+.table tbody td:nth-child(3) {
+  color: #B3B3B3;
+}
+
+.table tbody td:nth-child(4) {
+  color: #29B6F6;
+  font-weight: 500;
+}
+
+.table tbody td:nth-child(5),
+.table tbody td:nth-child(6) {
+  color: #B3B3B3;
+}
+
+.table tbody td:nth-child(7) {
+  color: #B3B3B3;
+}
+
+.btn-sm {
+  padding: 0.5rem;
+  font-size: 0.875rem;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  border: none;
+  margin: 0 0.25rem;
+}
+
+.btn-sm i {
+  margin: 0;
+}
+
+.btn-sm.btn-info {
+  background: rgba(41, 182, 246, 0.15);
+  color: #29B6F6;
+  box-shadow: none;
+}
+
+.btn-sm.btn-info:hover {
+  background: #29B6F6;
+  color: #FFFFFF;
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 4px 12px rgba(41, 182, 246, 0.4);
+}
+
+.form-control {
+  background: #FFFFFF;
+  border: 1px solid #ced4da;
+  color: #212529;
+  padding: 0.75rem 1rem;
+}
+
+.form-control:focus {
+  background: #FFFFFF;
+  border-color: #E10600;
+  color: #212529;
+  box-shadow: 0 0 0 0.2rem rgba(225, 6, 0, 0.25);
+}
+
+.progress {
+  background: #0F0F12;
+  height: 8px;
+  border-radius: 4px;
+}
+
+.progress-bar {
+  transition: width 0.3s ease;
+}
+
+.bg-success {
+  background: #00C853 !important;
+}
+
+.bg-warning {
+  background: #FFA726 !important;
+}
+
+.bg-danger {
+  background: #E10600 !important;
+}
+
+.alert-danger {
+  background: rgba(225, 6, 0, 0.1);
+  border: 1px solid #E10600;
+  color: #FF2E2E;
+  border-radius: 12px;
+}
+
+.alert-info {
+  background: rgba(41, 182, 246, 0.1);
+  border: 1px solid #29B6F6;
+  color: #29B6F6;
+  border-radius: 12px;
+}
+
+.text-muted {
+  color: #B3B3B3 !important;
+}
+
+.text-center {
+  text-align: center;
+  white-space: nowrap;
+}
+
+.text-center .btn-sm {
+  display: inline-flex;
+  margin: 0 0.25rem;
+}
+
+.text-nowrap {
+  white-space: nowrap;
+}
+
+caption {
+  display: none;
+}

@@ -36,8 +36,10 @@ export class MobileValidationComponent {
   onSubmit(): void {
     if (this.validationForm.valid) {
       this.apiService.validateMobile(this.validationForm.value).subscribe({
-        next: (subscriber) =>
-          this.router.navigate(['/recharge'], { state: { subscriber } }),
+        next: (subscriber) => {
+          localStorage.setItem('subscriber', JSON.stringify(subscriber));
+          this.router.navigate(['/user/plan-selection'], { state: { subscriber } });
+        },
         error: (err) => (this.errorMessage = err.message),
       });
     }

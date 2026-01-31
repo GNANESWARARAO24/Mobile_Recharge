@@ -36,7 +36,7 @@ export class AddSubscriberComponent implements OnInit {
       ],
       name: ['', Validators.required],
       email: ['', [Validators.email]],
-      currentPlanId: [null, Validators.required],
+      currentPlanId: ['', Validators.required],
     });
   }
 

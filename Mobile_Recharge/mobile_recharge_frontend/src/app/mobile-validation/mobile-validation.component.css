@@ -1,203 +1,139 @@
-/* validation-page.component.scss */
-
-.main-layout-wrapper {
-  position: absolute;
-  top: 65px; /* navbar height */
+.video-wrapper {
+  position: fixed;
+  top: 0;
   left: 0;
-  right: 0;
-  bottom: 40px; /* footer height */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: unset;
-  height: auto;
-  box-sizing: border-box;
-  overflow-y: auto;
-  background: transparent;
-}
-
-.content-center-wrapper {
   width: 100%;
   height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: unset;
-  padding: 0;
-}
-
-.validation-card {
-  max-width: 700px;
-  width: 100%;
-  display: flex;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
-  border-radius: 0.75rem;
+  z-index: -1;
   overflow: hidden;
-  background-color: #ffffff;
-  min-height: unset;
+  background: #0F0F12;
 }
 
-.card-welcome-section {
-  flex: 0 0 50%;
-  max-width: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 1.2rem;
-  background: linear-gradient(45deg, #007bff 0%, #0056b3 100%);
-  color: #ffffff;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  position: relative;
-  z-index: 1;
-  border-top-left-radius: 0.75rem;
-  border-bottom-left-radius: 0.75rem;
-  min-height: unset;
-}
-
-.welcome-heading {
-  font-size: 2.2rem;
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: 1rem; /* mb-3 equivalent */
-}
-
-.welcome-text {
-  text-align: center;
-  margin-bottom: 0; /* mb-0 equivalent */
-  font-size: 1.1rem;
-  line-height: 1.6;
-}
-
-.card-form-section {
-  flex: 0 0 50%;
-  max-width: 50%;
-  min-height: unset;
-  display: flex;
-  align-items: center;
-}
-
-.card-form-section .card-body {
-  padding: 1.2rem !important;
-  border: none;
-  border-top-right-radius: 0.75rem;
-  border-bottom-right-radius: 0.75rem;
+.video-wrapper video {
   width: 100%;
-  min-height: unset;
-}
-@media (max-width: 991.98px) {
-  .main-layout-wrapper {
-    top: 56px;
-    bottom: 36px;
-  }
-  .validation-card {
-    flex-direction: column;
-    min-height: unset;
-  }
-  .card-welcome-section,
-  .card-form-section {
-    max-width: 100%;
-    flex: 1 1 100%;
-    min-height: unset;
-    border-radius: 0 !important;
-  }
-  .card-welcome-section {
-    border-top-left-radius: 0.75rem !important;
-    border-top-right-radius: 0.75rem !important;
-    border-bottom-left-radius: 0 !important;
-    border-bottom-right-radius: 0 !important;
-  }
-  .card-form-section {
-    border-bottom-left-radius: 0.75rem !important;
-    border-bottom-right-radius: 0.75rem !important;
-    border-top-left-radius: 0 !important;
-    border-top-right-radius: 0 !important;
-  }
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.3;
 }
 
-.form-title {
-  color: #343a40;
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 2.5rem; /* mb-4 equivalent */
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 15, 18, 0.6);
+  z-index: 1;
+}
+
+.main-wrapper {
+  min-height: calc(100vh - 120px);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem; /* For spacing between icon and text */
+  padding: 2rem 1rem;
 }
 
-.form-title i.fas {
-  color: #007bff;
-  margin-right: 0; /* Ensure no conflicting margin */
-  font-size: 1.8rem;
+.glass-card {
+  background: #1A1A1F;
+  border-radius: 16px;
+  padding: 3rem 2.5rem;
+  max-width: 1000px;
+  width: 100%;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  border: 1px solid #2A2A2A;
 }
 
-.form-group-mb {
-  margin-bottom: 1rem; /* mb-3 equivalent */
-}
-
-.form-label-icon {
-  color: #495057;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  display: flex;
-  align-items: center;
-}
-
-.form-label-icon i.fas {
-  color: #6c757d;
-  margin-right: 0.5rem; /* me-2 equivalent */
-}
-
-.form-input-pill {
-  border-radius: 50rem !important; /* rounded-pill equivalent */
-  padding: 0.9rem 1.5rem; /* form-control-lg equivalent */
-  font-size: 1.1rem;
-  border: 1px solid #ced4da;
-  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-  width: 100%; /* w-100 equivalent if needed */
-}
-
-.validation-error-message {
-  color: #dc3545; /* text-danger equivalent */
-  font-size: 0.9rem;
-  margin-top: 0.5rem; /* mt-1 equivalent */
-}
-/* In validation-page.component.scss */
-
-.form-submit-button i.fas {
-  margin-right: 0.5rem; /* Adjust this value (e.g., 0.25rem, 0.5rem, 0.75rem) */
-}
-.form-submit-button {
-  background: linear-gradient(45deg, #007bff 0%, #0056b3 100%);
-  border: none;
-  border-radius: 50rem !important;
-  padding: 0.9rem 2rem;
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #fff;
-  letter-spacing: 0.5px;
-  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-  box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
-  width: 100%; /* w-100 equivalent */
-}
-
-.error-message-center {
-  color: #dc3545; /* text-danger equivalent */
+.title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 2rem;
   text-align: center;
-  margin-top: 1rem; /* mt-3 equivalent */
 }
 
-/* Add hover/disabled states for buttons here as well */
-.form-submit-button:hover:not(:disabled) {
-  background: linear-gradient(45deg, #0056b3 0%, #004085 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 123, 255, 0.4);
+.input-wrapper {
+  position: relative;
+  margin-bottom: 1.5rem;
 }
 
-.form-submit-button:disabled {
-  opacity: 0.6;
+.icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #E10600;
+  font-size: 1.2rem;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding: 1rem 1rem 1rem 3rem;
+  border: 2px solid #2A2A2A;
+  border-radius: 10px;
+  background: #0F0F12;
+  color: #FFFFFF;
+  font-size: 1rem;
+  transition: all 0.3s;
+}
+
+.input-wrapper input::placeholder {
+  color: #B3B3B3;
+}
+
+.input-wrapper input:focus {
+  outline: none;
+  border-color: #E10600;
+  box-shadow: 0 0 0 3px rgba(225, 6, 0, 0.1);
+}
+
+.error-text {
+  color: #FF2E2E;
+  font-size: 0.875rem;
+  margin-top: -1rem;
+  margin-bottom: 1rem;
+}
+
+.btn-action {
+  width: 100%;
+  padding: 1rem;
+  background: #E10600;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 4px 15px rgba(225, 6, 0, 0.3);
+}
+
+.btn-action:hover:not(:disabled) {
+  background: #FF2E2E;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(225, 6, 0, 0.4);
+}
+
+.btn-action:disabled {
+  opacity: 0.5;
   cursor: not-allowed;
-  box-shadow: none;
+}
+
+.error-alert {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: rgba(225, 6, 0, 0.1);
+  border: 1px solid rgba(225, 6, 0, 0.3);
+  border-radius: 8px;
+  color: #FF2E2E;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 576px) {
+  .glass-card {
+    padding: 2rem 1.5rem;
+  }
+  .title {
+    font-size: 1.5rem;
+  }
 }

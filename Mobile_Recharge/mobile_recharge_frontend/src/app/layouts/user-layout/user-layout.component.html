@@ -1,0 +1,19 @@
+<div class="user-layout">
+  <nav class="user-navbar">
+    <div class="container-fluid">
+      <div class="navbar-content">
+        <div class="welcome-text">
+          <i class="fas fa-user-circle me-2"></i>
+          Welcome, <strong>{{ userName }}</strong>
+        </div>
+        <button class="logout-btn" (click)="logout()">
+          <i class="fas fa-sign-out-alt me-2"></i>Logout
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="user-content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

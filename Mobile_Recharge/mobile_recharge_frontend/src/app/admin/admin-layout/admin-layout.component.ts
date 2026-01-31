@@ -19,13 +19,9 @@ export class AdminLayoutComponent implements OnInit {
   }
 
   logout(): void {
-    console.log('Admin logging out...');
-    // --- Implement your actual logout logic here ---
-    // 1. Clear authentication token/data from localStorage, sessionStorage, or a service
-    localStorage.removeItem('adminToken'); // Example: if you store a token
-    // this.authService.clearSession(); // Example: if using an AuthService
-
-    // 2. Redirect to the admin login page or a public home page
-    this.router.navigate(['/admin/login']); // Adjust this path to your admin login route
+    if (confirm('Are you sure you want to logout?')) {
+      localStorage.removeItem('adminToken');
+      this.router.navigate(['/admin/login']);
+    }
   }
 }

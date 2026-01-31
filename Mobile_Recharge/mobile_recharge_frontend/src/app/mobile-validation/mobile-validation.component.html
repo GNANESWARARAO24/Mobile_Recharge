@@ -1,63 +1,46 @@
-<div class="main-layout-wrapper">
-  <div class="content-center-wrapper">
-    <div class="validation-card">
-      <div class="card-welcome-section">
-        <h3 class="welcome-heading">Welcome!</h3>
-        <p class="welcome-text">
-          Please enter your mobile number to proceed with the validation.
-        </p>
+<div class="video-wrapper">
+  <video autoplay muted loop playsinline>
+    <source src="/bg-video.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <div class="video-overlay"></div>
+</div>
+
+<div class="main-wrapper">
+  <div class="glass-card">
+    <h2 class="title">Validate Mobile Number</h2>
+    
+    <form [formGroup]="validationForm" (ngSubmit)="onSubmit()">
+      <div class="input-wrapper">
+        <i class="fas fa-mobile-alt icon"></i>
+        <input
+          type="text"
+          formControlName="mobileNumber"
+          maxlength="10"
+          placeholder="Enter 10-digit mobile number"
+        />
+      </div>
+      
+      <div
+        *ngIf="validationForm.get('mobileNumber')?.hasError('required') && validationForm.get('mobileNumber')?.touched"
+        class="error-text"
+      >
+        Mobile number is required
+      </div>
+      <div
+        *ngIf="validationForm.get('mobileNumber')?.hasError('pattern') && validationForm.get('mobileNumber')?.touched"
+        class="error-text"
+      >
+        Enter a valid 10-digit number
       </div>
 
-      <div class="card-form-section">
-        <div class="card-body">
-          <h2 class="form-title">
-            <i class="fas fa-mobile-alt"></i>Validate Mobile Number
-          </h2>
-          <form [formGroup]="validationForm" (ngSubmit)="onSubmit()">
-            <div class="form-group-mb">
-              <label for="mobileNumber" class="form-label-icon">
-                <i class="fas fa-phone"></i>Mobile Number
-              </label>
-              <input
-                type="text"
-                formControlName="mobileNumber"
-                maxlength="10"
-                class="form-input-pill"
-                id="mobileNumber"
-                required
-              />
-              <div
-                *ngIf="
-                  validationForm.get('mobileNumber')?.hasError('required') &&
-                  validationForm.get('mobileNumber')?.touched
-                "
-                class="validation-error-message"
-              >
-                Mobile number is required
-              </div>
-              <div
-                *ngIf="
-                  validationForm.get('mobileNumber')?.hasError('pattern') &&
-                  validationForm.get('mobileNumber')?.touched
-                "
-                class="validation-error-message"
-              >
-                Enter a valid 10-digit number
-              </div>
-            </div>
-            <button
-              type="submit"
-              [disabled]="validationForm.invalid"
-              class="form-submit-button"
-            >
-              <i class="fas fa-check"></i>Validate
-            </button>
-            <p *ngIf="errorMessage" class="error-message-center">
-              {{ errorMessage }}
-            </p>
-          </form>
-        </div>
+      <button type="submit" [disabled]="validationForm.invalid" class="btn-action">
+        Validate Number
+      </button>
+
+      <div *ngIf="errorMessage" class="error-alert">
+        {{ errorMessage }}
       </div>
-    </div>
+    </form>
   </div>
 </div>

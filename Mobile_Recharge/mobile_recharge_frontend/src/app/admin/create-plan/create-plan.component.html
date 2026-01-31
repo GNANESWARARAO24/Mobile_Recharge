@@ -1,13 +1,13 @@
 <div class="container py-5">
   <div class="card shadow-lg mx-auto" style="max-width: 700px">
     <div class="card-body p-4">
-      <h2 class="card-title text-center mb-4 text-dark fs-4">
-        <i class="fas fa-plus-circle me-2 text-success"></i>Add New Plan
+      <h2 class="card-title text-center mb-4 fs-4">
+        <i class="fas fa-plus-circle me-2"></i>Add New Plan
       </h2>
 
       <form [formGroup]="addPlanForm" (ngSubmit)="onSubmit()">
         <div class="mb-3">
-          <label for="name" class="form-label text-muted">Plan Name</label>
+          <label for="name" class="form-label">Plan Name</label>
           <input
             type="text"
             id="name"
@@ -30,7 +30,7 @@
         </div>
 
         <div class="mb-3">
-          <label for="category" class="form-label text-muted">Category</label>
+          <label for="category" class="form-label">Category</label>
           <select
             id="category"
             formControlName="category"
@@ -58,7 +58,7 @@
         </div>
 
         <div class="mb-3">
-          <label for="price" class="form-label text-muted">Price (₹)</label>
+          <label for="price" class="form-label">Price (₹)</label>
           <input
             type="number"
             id="price"
@@ -85,7 +85,7 @@
         </div>
 
         <div class="mb-3">
-          <label for="dataPerDay" class="form-label text-muted"
+          <label for="dataPerDay" class="form-label"
             >Data Per Day</label
           >
           <input
@@ -98,7 +98,7 @@
         </div>
 
         <div class="mb-3">
-          <label for="calls" class="form-label text-muted">Calls</label>
+          <label for="calls" class="form-label">Calls</label>
           <input
             type="text"
             id="calls"
@@ -109,7 +109,7 @@
         </div>
 
         <div class="mb-3">
-          <label for="sms" class="form-label text-muted">SMS</label>
+          <label for="sms" class="form-label">SMS</label>
           <input
             type="text"
             id="sms"
@@ -120,7 +120,7 @@
         </div>
 
         <div class="mb-4">
-          <label for="validityDays" class="form-label text-muted"
+          <label for="validityDays" class="form-label"
             >Validity (Days)</label
           >
           <input
@@ -151,15 +151,15 @@
         <button
           type="submit"
           [disabled]="addPlanForm.invalid"
-          class="btn btn-success btn-lg w-100 mb-3 d-flex align-items-center justify-content-center"
+          class="btn btn-primary btn-lg w-100 mb-3 d-flex align-items-center justify-content-center"
         >
           <i class="fas fa-save me-2"></i>Add Plan
         </button>
 
-        <p *ngIf="successMessage" class="text-success text-center mt-3 mb-0">
+        <p *ngIf="successMessage" class="alert alert-success text-center mt-3 mb-0">
           {{ successMessage }}
         </p>
-        <p *ngIf="errorMessage" class="text-danger text-center mt-3 mb-0">
+        <p *ngIf="errorMessage" class="alert alert-danger text-center mt-3 mb-0">
           {{ errorMessage }}
         </p>
       </form>

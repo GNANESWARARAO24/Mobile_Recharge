@@ -2,16 +2,16 @@
   class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-4 border-bottom"
 >
   <h1 class="h2">
-    <i class="fas fa-tachometer-alt me-2 text-primary"></i>Admin Dashboard
+    <i class="fas fa-tachometer-alt me-2"></i>Admin Dashboard
   </h1>
 </div>
 
 <div class="row mb-4" *ngIf="activeTab === 'overview' || activeTab === 'history'">
   <div class="col-md-6 mb-3 mb-md-0">
-    <div class="card h-100 p-3 d-flex flex-row align-items-center shadow-sm">
-      <i class="fas fa-list-alt text-success display-6 me-3"></i>
+    <div class="card h-100 p-3 d-flex flex-row align-items-center shadow-sm" style="cursor: pointer;" (click)="navigateToPlans()">
+      <i class="fas fa-list-alt display-6 me-3"></i>
       <div>
-        <div class="h4 mb-0 text-primary">
+        <div class="h4 mb-0">
           {{ planCount }}
         </div>
         <div class="text-muted">Total Plans</div>
@@ -19,10 +19,10 @@
     </div>
   </div>
   <div class="col-md-6 mb-3 mb-md-0">
-    <div class="card h-100 p-3 d-flex flex-row align-items-center shadow-sm">
-      <i class="fas fa-users text-success me-3 fa-2x"></i>
+    <div class="card h-100 p-3 d-flex flex-row align-items-center shadow-sm" style="cursor: pointer;" (click)="navigateToSubscribers()">
+      <i class="fas fa-users me-3 fa-2x"></i>
       <div>
-        <div class="h4 mb-0 text-primary">
+        <div class="h4 mb-0">
           {{ subscribersCount }}
         </div>
         <div class="text-muted">Total Subscribers</div>
@@ -32,9 +32,8 @@
 </div>
 
 <div class="card p-3 mb-4 shadow-sm" *ngIf="activeTab === 'overview' || activeTab === 'expiring'">
-  <h3 class="h6 mb-3 text-muted d-flex align-items-center">
-    <i class="fas fa-hourglass-half me-2 text-warning"></i>Expiring Subscribers
-    (Next 30 Days)
+  <h3 class="h6 mb-3 d-flex align-items-center">
+    <i class="fas fa-hourglass-half me-2"></i>Expiring Subscribers (Next 30 Days)
   </h3>
   <div class="table-responsive">
     <table class="table table-striped table-hover table-bordered">
@@ -64,15 +63,15 @@
 </div>
 
 <div class="card p-3 mb-4 shadow-sm" *ngIf="activeTab === 'overview' || activeTab === 'history'">
-  <h3 class="h6 mb-3 text-muted d-flex align-items-center">
-    <i class="fas fa-history me-2 text-info"></i>Search Recharge History
+  <h3 class="h6 mb-3 d-flex align-items-center">
+    <i class="fas fa-history me-2"></i>Search Recharge History
   </h3>
   
   <form [formGroup]="historyForm" (ngSubmit)="onHistorySubmit()" class="mb-4">
     <div class="row">
       <div class="col-md-4 mb-3">
-        <label for="mobileNumber" class="form-label d-flex align-items-center text-muted">
-          <i class="fas fa-mobile-alt me-2 text-info"></i>Mobile Number
+        <label for="mobileNumber" class="form-label d-flex align-items-center">
+          <i class="fas fa-mobile-alt me-2"></i>Mobile Number
         </label>
         <input
           type="text"
@@ -97,8 +96,8 @@
       </div>
       
       <div class="col-md-3 mb-3">
-        <label for="startDate" class="form-label d-flex align-items-center text-muted">
-          <i class="fas fa-calendar me-2 text-info"></i>Start Date
+        <label for="startDate" class="form-label d-flex align-items-center">
+          <i class="fas fa-calendar me-2"></i>Start Date
         </label>
         <input
           type="date"
@@ -109,8 +108,8 @@
       </div>
       
       <div class="col-md-3 mb-3">
-        <label for="endDate" class="form-label d-flex align-items-center text-muted">
-          <i class="fas fa-calendar me-2 text-info"></i>End Date
+        <label for="endDate" class="form-label d-flex align-items-center">
+          <i class="fas fa-calendar me-2"></i>End Date
         </label>
         <input
           type="date"
@@ -143,19 +142,19 @@
   <!-- Statistics Summary -->
   <div class="row mb-3" *ngIf="filteredHistory.length > 0">
     <div class="col-md-4">
-      <div class="card bg-light p-2">
+      <div class="card stat-summary p-2">
         <small class="text-muted">Total Recharges</small>
         <h5 class="mb-0">{{ totalRecharges }}</h5>
       </div>
     </div>
     <div class="col-md-4">
-      <div class="card bg-light p-2">
+      <div class="card stat-summary p-2">
         <small class="text-muted">Total Amount</small>
         <h5 class="mb-0">₹{{ totalAmount }}</h5>
       </div>
     </div>
     <div class="col-md-4">
-      <div class="card bg-light p-2">
+      <div class="card stat-summary p-2">
         <small class="text-muted">Average Amount</small>
         <h5 class="mb-0">₹{{ avgAmount | number:'1.2-2' }}</h5>
       </div>
@@ -199,7 +198,7 @@
       <tbody>
         <tr *ngFor="let recharge of filteredHistory; let i = index">
           <td>{{ recharge.plan.name }}</td>
-          <td>₹{{ recharge.amount }}</td>
+          <td class="amount-cell">₹{{ recharge.amount }}</td>
           <td>
             <span class="badge bg-info">{{ recharge.paymentMethod }}</span>
           </td>
@@ -218,7 +217,7 @@
   
   <!-- Loading State -->
   <div *ngIf="isLoading" class="text-center py-4">
-    <div class="spinner-border text-primary" role="status">
+    <div class="spinner-border" role="status">
       <span class="visually-hidden">Loading...</span>
     </div>
     <p class="mt-2 text-muted">Fetching recharge history...</p>

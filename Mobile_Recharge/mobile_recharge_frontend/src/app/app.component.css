@@ -1,30 +1,44 @@
-/* Define your custom colors as CSS variables for easier use */
 :root {
-  --primary-red: #990302;
-  --light-background: #ebe2e0; /* Corrected from ebe2eo */
-  --dark-text: #212121; /* 'Smoke Black' */
-  --pure-black: #000000;
-  --pure-white: #ffffff;
+  --primary-red: #E10600;
+  --hover-red: #FF2E2E;
+  --dark-bg: #0F0F12;
+  --card-bg: #1A1A1F;
+  --border-color: #2A2A2A;
+  --text-primary: #FFFFFF;
+  --text-secondary: #B3B3B3;
+  --success-color: #00C853;
 }
 
-/* Custom Navbar Styling */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--dark-bg);
+  color: var(--text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
 .custom-themed-navbar {
-  background-color: var(--dark-text); /* Use smoke black as the background */
-  border-bottom: 3px solid var(--primary-red); /* A subtle accent line */
+  background: var(--card-bg) !important;
+  border-bottom: 2px solid var(--primary-red);
 }
 
 .custom-themed-navbar .navbar-brand {
-  color: var(--pure-white); /* White text for brand */
-  font-size: 1.5rem; /* Make brand slightly larger */
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  font-weight: 600;
 }
 
 .custom-themed-navbar .navbar-brand i {
-  color: var(--primary-red); /* Red icon for brand */
+  color: var(--primary-red);
   margin-right: 0.5rem;
 }
 
 .custom-themed-navbar .navbar-toggler {
-  border-color: rgba(255, 255, 255, 0.2); /* Light border for toggler */
+  border-color: var(--border-color);
 }
 
 .custom-themed-navbar .navbar-toggler-icon {
@@ -32,33 +46,28 @@
 }
 
 .custom-themed-navbar .nav-link {
-  color: rgba(255, 255, 255, 0.75); /* Slightly transparent white for links */
+  color: var(--text-secondary);
   font-weight: 500;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .custom-themed-navbar .nav-link:hover,
 .custom-themed-navbar .nav-link.active {
-  color: var(--pure-white); /* Pure white on hover/active */
+  color: var(--text-primary);
 }
 
 .custom-themed-navbar .nav-link i {
-  color: var(--light-background); /* Use the light background color for icons */
+  color: var(--text-secondary);
   margin-right: 0.25rem;
 }
 
-/* Adjust the icon color on hover/active */
 .custom-themed-navbar .nav-link:hover i,
 .custom-themed-navbar .nav-link.active i {
-  color: var(--primary-red); /* Red icon on hover/active */
+  color: var(--primary-red);
 }
 
-/* Padding for main content to prevent overlap with fixed navbar */
 .main-content {
-  padding-top: 70px; /* Adjust based on your navbar's actual height */
-}
-
-/* You might want to use the light-background for your main page background */
-body {
-  background-color: var(--light-background);
+  padding-top: 70px;
+  background: var(--dark-bg);
+  min-height: 100vh;
 }
