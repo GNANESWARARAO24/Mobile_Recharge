@@ -22,7 +22,7 @@ import {
   providedIn: 'root',
 })
 export class ApiService {
-  private readonly apiUrl = 'http://localhost:8082/api';
+  private readonly apiUrl = '/api';
   private token: string | null = null;
 
   constructor(private http: HttpClient) {
@@ -129,6 +129,12 @@ export class ApiService {
     
     return this.http
       .get<Recharge[]>(url, { headers: this.getHeaders() })
+      .pipe(catchError((error) => this.handleError(error)));
+  }
+
+  getUserRechargeHistory(mobileNumber: string): Observable<Recharge[]> {
+    return this.http
+      .get<Recharge[]>(`${this.apiUrl}/user/recharge-history/${mobileNumber}`)
       .pipe(catchError((error) => this.handleError(error)));
   }
 

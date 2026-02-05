@@ -1,0 +1,65 @@
+<div class="history-wrapper">
+  <div class="user-dashboard">
+    <div class="container">
+      <div class="dashboard-content">
+        <div class="welcome-section">
+          <i class="fas fa-user-circle me-2"></i>
+          <span>Welcome, <strong>{{ subscriber?.name || 'User' }}</strong></span>
+        </div>
+        <button class="logout-btn" (click)="logout()">
+          <i class="fas fa-sign-out-alt me-2"></i>Logout
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container py-4">
+    <div class="header-section">
+      <h2 class="main-title">
+        <i class="fas fa-history me-2"></i>Recharge History
+      </h2>
+      <button class="recharge-btn" (click)="goToPlans()">
+        <i class="fas fa-plus me-2"></i>New Recharge
+      </button>
+    </div>
+
+    <div *ngIf="recharges.length > 0" class="history-grid">
+      <div *ngFor="let recharge of recharges" class="history-card">
+        <div class="card-header">
+          <div class="plan-name">{{ recharge.plan.name }}</div>
+          <div class="header-right">
+            <div class="amount">₹{{ recharge.amount }}</div>
+            <button class="repeat-icon-btn" (click)="rechargeAgain(recharge.plan)" title="Repeat Recharge">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="info-row">
+            <span class="label">Date:</span>
+            <span class="value">{{ recharge.rechargeDate | date: 'dd MMM yyyy, hh:mm a' }}</span>
+          </div>
+          <div class="info-row">
+            <span class="label">Payment:</span>
+            <span class="value">{{ recharge.paymentMethod }}</span>
+          </div>
+          <div class="info-row">
+            <span class="label">Status:</span>
+            <span class="status-badge" [class.success]="recharge.status === 'Success'" [class.failed]="recharge.status === 'Failed'">
+              {{ recharge.status }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="recharges.length === 0" class="no-history">
+      <i class="fas fa-receipt"></i>
+      <h3>No Recharge History</h3>
+      <p>You haven't made any recharges yet.</p>
+      <button class="recharge-btn-large" (click)="goToPlans()">
+        <i class="fas fa-plus me-2"></i>Make Your First Recharge
+      </button>
+    </div>
+  </div>
+</div>

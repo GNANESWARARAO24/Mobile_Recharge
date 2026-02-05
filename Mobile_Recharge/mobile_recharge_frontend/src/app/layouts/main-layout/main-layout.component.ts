@@ -18,7 +18,7 @@ export class MainLayoutComponent {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((event: any) => {
-        this.showNavbar = !event.url.includes('/plan-selection') && !event.url.includes('/payment');
+        this.showNavbar = !event.url.includes('/user/');
       });
   }
 }

@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface RechargeRepository extends JpaRepository<Recharge, Long> {
 	List<Recharge> findByMobileNumber(String mobileNumber);
+	List<Recharge> findByMobileNumberOrderByRechargeDateDesc(String mobileNumber);
 }

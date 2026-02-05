@@ -15,6 +15,7 @@ import { SubscriberListComponent } from './admin/subscriber-list/subscriber-list
 import { RechargeHistoryComponent } from './admin/recharge-history/recharge-history.component';
 import { PlanSelectionComponent } from './plan-selection/plan-selection.component';
 import { PaymentComponent } from './payment/payment.component';
+import { UserRechargeHistoryComponent } from './user-recharge-history/user-recharge-history.component';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component'; // Assuming layouts/main-layout/ is correct
 import { UserLayoutComponent } from './layouts/user-layout/user-layout.component';
 
@@ -40,6 +41,7 @@ export const routes: Routes = [
       { path: '', redirectTo: 'plan-selection', pathMatch: 'full' },
       { path: 'plan-selection', component: PlanSelectionComponent },
       { path: 'payment', component: PaymentComponent },
+      { path: 'recharge-history', component: UserRechargeHistoryComponent },
     ],
   },
   // Admin section (with AdminLayoutComponent)

@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mobile-recharge-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mobile_recharge
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - mobile-recharge-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  backend:
+    build: ./backend
+    container_name: mobile-recharge-backend
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/mobile_recharge
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    ports:
+      - "8082:8082"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    restart: on-failure
+    networks:
+      - mobile-recharge-network
+
+  frontend:
+    build: ./mobile_recharge_frontend
+    container_name: mobile-recharge-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - mobile-recharge-network
+
+volumes:
+  mysql-data:
+
+networks:
+  mobile-recharge-network:
+    driver: bridge

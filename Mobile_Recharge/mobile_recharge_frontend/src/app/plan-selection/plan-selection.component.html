@@ -1,4 +1,23 @@
 <div class="plan-selection-wrapper">
+  <div class="user-dashboard">
+    <div class="container">
+      <div class="dashboard-content">
+        <div class="welcome-section">
+          <i class="fas fa-user-circle me-2"></i>
+          <span>Welcome, <strong>{{ subscriber?.name || 'User' }}</strong></span>
+        </div>
+        <div class="nav-actions">
+          <button class="history-btn" (click)="goToHistory()">
+            <i class="fas fa-history me-2"></i>History
+          </button>
+          <button class="logout-btn" (click)="logout()">
+            <i class="fas fa-sign-out-alt me-2"></i>Logout
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="container py-4">
     <h2 class="main-title">
       <i class="fas fa-list me-2"></i>Select Your Plan

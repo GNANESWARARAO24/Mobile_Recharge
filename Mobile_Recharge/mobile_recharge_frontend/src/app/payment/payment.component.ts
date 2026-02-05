@@ -85,6 +85,11 @@ export class PaymentComponent implements OnInit {
 
   onSubmit(): void {
     if (this.paymentForm.valid && this.plan && this.subscriber) {
+      const confirmMsg = `Confirm recharge of ₹${this.plan.price} for ${this.plan.name}?`;
+      if (!confirm(confirmMsg)) {
+        return;
+      }
+
       const request: any = {
         mobileNumber: this.subscriber.mobileNumber,
         planId: this.plan.id,
@@ -101,13 +106,19 @@ export class PaymentComponent implements OnInit {
         next: (response) => {
           this.successMessage = `Recharge successful! Transaction ID: ${response.transactionId}`;
           this.cdr.detectChanges();
-          setTimeout(() => this.router.navigate(['/']), 3000);
+          setTimeout(() => this.router.navigate(['/user/recharge-history'], { state: { subscriber: this.subscriber } }), 2000);
         },
         error: (err) => {
           this.errorMessage = err.message || 'Recharge failed. Please try again.';
           this.cdr.detectChanges();
         },
       });
+    }
+  }
+
+  logout(): void {
+    if (confirm('Are you sure you want to logout?')) {
+      this.router.navigate(['/']);
     }
   }
 }

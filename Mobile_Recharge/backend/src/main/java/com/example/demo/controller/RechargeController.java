@@ -82,11 +82,22 @@ public class RechargeController {
 		subscriber.setDataTotal(Double.valueOf(plan.getDataPerDay().replace("GB/day", "")) * plan.getValidityDays());
 		subscriberRepository.save(subscriber);
 
-		// Send confirmation email
+		// Send confirmation email (disabled for development)
 		String transactionId = UUID.randomUUID().toString();
-		emailService.sendConfirmationEmail(subscriber.getEmail(), subscriber.getMobileNumber(), plan.getName(),
-				plan.getPrice(), transactionId);
+		try {
+			emailService.sendConfirmationEmail(subscriber.getEmail(), subscriber.getMobileNumber(), plan.getName(),
+					plan.getPrice(), transactionId);
+		} catch (Exception e) {
+			// Log error but don't fail the recharge
+			System.out.println("Email sending failed: " + e.getMessage());
+		}
 
 		return ResponseEntity.ok(new RechargeResponse(transactionId));
+	}
+
+	@GetMapping("/recharge-history/{mobileNumber}")
+	public ResponseEntity<List<Recharge>> getUserRechargeHistory(@PathVariable String mobileNumber) {
+		List<Recharge> recharges = rechargeRepository.findByMobileNumberOrderByRechargeDateDesc(mobileNumber);
+		return ResponseEntity.ok(recharges);
 	}
 }

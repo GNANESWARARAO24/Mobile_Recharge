@@ -1,173 +1,176 @@
-<div class="container py-5">
-  <div class="card shadow-lg mx-auto" style="max-width: 500px">
-    <div class="card-body p-4">
-      <h2 class="card-title text-center mb-4 text-dark fs-4">
-        <i class="fas fa-edit me-2 text-primary"></i>Edit Plan
+<div class="edit-plan-wrapper">
+  <div class="container py-4">
+    <div class="edit-card">
+      <h2 class="page-title">
+        <i class="fas fa-edit me-2"></i>Edit Plan
       </h2>
 
       <form [formGroup]="editPlanForm" (ngSubmit)="onSubmit()">
-        <div class="mb-3">
-          <label for="name" class="form-label text-muted">Plan Name</label>
-          <input
-            type="text"
-            id="name"
-            formControlName="name"
-            class="form-control form-control-lg"
-            placeholder="e.g., Unlimited Data Plan"
-            required
-          />
-          <div
-            *ngIf="
-              editPlanForm.get('name')?.invalid &&
-              editPlanForm.get('name')?.touched
-            "
-            class="text-danger mt-1 small"
-          >
-            <span *ngIf="editPlanForm.get('name')?.hasError('required')">
-              Plan name is required.
-            </span>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name" class="form-label">Plan Name</label>
+            <input
+              type="text"
+              id="name"
+              formControlName="name"
+              class="form-control"
+              placeholder="e.g., Unlimited Data Plan"
+              required
+            />
+            <div
+              *ngIf="
+                editPlanForm.get('name')?.invalid &&
+                editPlanForm.get('name')?.touched
+              "
+              class="error-text"
+            >
+              <span *ngIf="editPlanForm.get('name')?.hasError('required')">
+                Plan name is required.
+              </span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="category" class="form-label">Category</label>
+            <select
+              id="category"
+              formControlName="category"
+              class="form-control"
+              required
+            >
+              <option value="" disabled>Select a category</option>
+              <option value="Popular">Popular</option>
+              <option value="Validity">Validity</option>
+              <option value="Data">Data</option>
+              <option value="Unlimited">Unlimited</option>
+              <option value="Special">Special</option>
+            </select>
+            <div
+              *ngIf="
+                editPlanForm.get('category')?.invalid &&
+                editPlanForm.get('category')?.touched
+              "
+              class="error-text"
+            >
+              <span *ngIf="editPlanForm.get('category')?.hasError('required')">
+                Category is required.
+              </span>
+            </div>
           </div>
         </div>
 
-        <div class="mb-3">
-          <label for="category" class="form-label text-muted">Category</label>
-          <input
-            type="text"
-            id="category"
-            formControlName="category"
-            class="form-control form-control-lg"
-            placeholder="e.g., Prepaid, Postpaid, Fiber"
-            required
-          />
-          <div
-            *ngIf="
-              editPlanForm.get('category')?.invalid &&
-              editPlanForm.get('category')?.touched
-            "
-            class="text-danger mt-1 small"
-          >
-            <span *ngIf="editPlanForm.get('category')?.hasError('required')">
-              Category is required.
-            </span>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="price" class="form-label">Price (₹)</label>
+            <input
+              type="number"
+              id="price"
+              formControlName="price"
+              class="form-control"
+              placeholder="e.g., 299"
+              required
+              min="0"
+            />
+            <div
+              *ngIf="
+                editPlanForm.get('price')?.invalid &&
+                editPlanForm.get('price')?.touched
+              "
+              class="error-text"
+            >
+              <span *ngIf="editPlanForm.get('price')?.hasError('required')">
+                Price is required.
+              </span>
+              <span *ngIf="editPlanForm.get('price')?.hasError('min')">
+                Price must be non-negative.
+              </span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="validityDays" class="form-label"
+              >Validity (Days)</label
+            >
+            <input
+              type="number"
+              id="validityDays"
+              formControlName="validityDays"
+              class="form-control"
+              placeholder="e.g., 28, 365"
+              required
+              min="1"
+            />
+            <div
+              *ngIf="
+                editPlanForm.get('validityDays')?.invalid &&
+                editPlanForm.get('validityDays')?.touched
+              "
+              class="error-text"
+            >
+              <span
+                *ngIf="editPlanForm.get('validityDays')?.hasError('required')"
+              >
+                Validity Days is required.
+              </span>
+              <span *ngIf="editPlanForm.get('validityDays')?.hasError('min')">
+                Validity Days must be at least 1.
+              </span>
+            </div>
           </div>
         </div>
 
-        <div class="mb-3">
-          <label for="price" class="form-label text-muted">Price (₹)</label>
-          <input
-            type="number"
-            id="price"
-            formControlName="price"
-            class="form-control form-control-lg"
-            placeholder="e.g., 299"
-            required
-            min="0"
-          />
-          <div
-            *ngIf="
-              editPlanForm.get('price')?.invalid &&
-              editPlanForm.get('price')?.touched
-            "
-            class="text-danger mt-1 small"
-          >
-            <span *ngIf="editPlanForm.get('price')?.hasError('required')">
-              Price is required.
-            </span>
-            <span *ngIf="editPlanForm.get('price')?.hasError('min')">
-              Price must be non-negative.
-            </span>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="dataPerDay" class="form-label"
+              >Data Per Day</label
+            >
+            <input
+              type="text"
+              id="dataPerDay"
+              formControlName="dataPerDay"
+              class="form-control"
+              placeholder="e.g., 1.5 GB, Unlimited"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="calls" class="form-label">Calls</label>
+            <input
+              type="text"
+              id="calls"
+              formControlName="calls"
+              class="form-control"
+              placeholder="e.g., Unlimited, 100 Mins"
+            />
           </div>
         </div>
 
-        <div class="mb-3">
-          <label for="dataPerDay" class="form-label text-muted"
-            >Data Per Day</label
-          >
-          <input
-            type="text"
-            id="dataPerDay"
-            formControlName="dataPerDay"
-            class="form-control form-control-lg"
-            placeholder="e.g., 1.5 GB, Unlimited"
-          />
-        </div>
-
-        <div class="mb-3">
-          <label for="calls" class="form-label text-muted">Calls</label>
-          <input
-            type="text"
-            id="calls"
-            formControlName="calls"
-            class="form-control form-control-lg"
-            placeholder="e.g., Unlimited, 100 Mins"
-          />
-        </div>
-
-        <div class="mb-3">
-          <label for="sms" class="form-label text-muted">SMS</label>
+        <div class="form-group">
+          <label for="sms" class="form-label">SMS</label>
           <input
             type="text"
             id="sms"
             formControlName="sms"
-            class="form-control form-control-lg"
+            class="form-control"
             placeholder="e.g., 100 SMS/Day, Unlimited"
           />
-        </div>
-
-        <div class="mb-4">
-          <label for="validityDays" class="form-label text-muted"
-            >Validity (Days)</label
-          >
-          <input
-            type="number"
-            id="validityDays"
-            formControlName="validityDays"
-            class="form-control form-control-lg"
-            placeholder="e.g., 28, 365"
-            required
-            min="1"
-          />
-          <div
-            *ngIf="
-              editPlanForm.get('validityDays')?.invalid &&
-              editPlanForm.get('validityDays')?.touched
-            "
-            class="text-danger mt-1 small"
-          >
-            <span
-              *ngIf="editPlanForm.get('validityDays')?.hasError('required')"
-            >
-              Validity Days is required.
-            </span>
-            <span *ngIf="editPlanForm.get('validityDays')?.hasError('min')">
-              Validity Days must be at least 1.
-            </span>
-          </div>
         </div>
 
         <button
           type="submit"
           [disabled]="editPlanForm.invalid"
-          class="btn btn-primary btn-lg w-100 mb-3 d-flex align-items-center justify-content-center"
+          class="btn-action"
         >
           <i class="fas fa-save me-2"></i>Update Plan
         </button>
 
-        <p *ngIf="successMessage" class="text-success text-center mt-3 mb-0">
+        <p *ngIf="successMessage" class="success-alert">
           {{ successMessage }}
         </p>
-        <p *ngIf="errorMessage" class="text-danger text-center mt-3 mb-0">
+        <p *ngIf="errorMessage" class="error-alert">
           {{ errorMessage }}
         </p>
       </form>
-      <!-- <div class="text-center mt-4">
-        <button
-          (click)="navigateToAdminDashboard()"
-          class="btn btn-link text-primary text-decoration-none"
-        >
-          Back to Admin Dashboard
-        </button>
-      </div> -->
     </div>
   </div>
 </div>

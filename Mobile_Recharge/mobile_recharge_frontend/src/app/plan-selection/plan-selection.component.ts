@@ -23,6 +23,10 @@ export class PlanSelectionComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscriber = history.state.subscriber;
+    if (!this.subscriber) {
+      this.router.navigate(['/']);
+      return;
+    }
     this.apiService.getPlans().subscribe({
       next: (plans) => {
         this.plans = plans;
@@ -42,5 +46,15 @@ export class PlanSelectionComponent implements OnInit {
     this.router.navigate(['/user/payment'], { 
       state: { plan: selectedPlan, subscriber: this.subscriber } 
     });
+  }
+
+  logout(): void {
+    if (confirm('Are you sure you want to logout?')) {
+      this.router.navigate(['/']);
+    }
+  }
+
+  goToHistory(): void {
+    this.router.navigate(['/user/recharge-history'], { state: { subscriber: this.subscriber } });
   }
 }
