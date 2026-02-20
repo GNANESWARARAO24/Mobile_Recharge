@@ -37,6 +37,13 @@
   transition: all 0.3s;
 }
 
+.navbar-logo {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  border-radius: 100%;
+}
+
 .navbar-brand:hover {
   color: #E10600 !important;
   transform: scale(1.05);

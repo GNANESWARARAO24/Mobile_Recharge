@@ -3,7 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.dto.NewPlanRequest;
 import com.example.demo.dto.UpdatePlanRequest;
 import com.example.demo.model.Plan;
-import com.example.demo.repository.PlanRepository;
+import com.example.demo.service.PlanService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,61 +18,46 @@ import java.util.List;
 public class PlanController {
 
 	@Autowired
-	private PlanRepository planRepository;
+	private PlanService planService;
 
 	@GetMapping
 	public ResponseEntity<List<Plan>> getAllPlans() {
-		return ResponseEntity.ok(planRepository.findAll());
+		return ResponseEntity.ok(planService.getAllPlans());
 	}
 
-	@GetMapping("/count") // New endpoint to get the count of plans
+	@GetMapping("/count")
 	public ResponseEntity<Long> getPlanCount() {
-		long count = planRepository.count();
-		return ResponseEntity.ok(count);
+		return ResponseEntity.ok(planService.getPlanCount());
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Plan> getPlanById(@PathVariable Long id) {
-		return planRepository.findById(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+		return planService.getPlanById(id)
+				.map(ResponseEntity::ok)
+				.orElse(ResponseEntity.notFound().build());
 	}
 
 	@PostMapping
-	public ResponseEntity<Plan> createPlan(@Valid @RequestBody NewPlanRequest newPlanRequest) {
-		Plan plan = new Plan();
-		plan.setName(newPlanRequest.getName());
-		plan.setCategory(Plan.Category.valueOf(newPlanRequest.getCategory())); // Assuming you want to use the enum
-		plan.setPrice(newPlanRequest.getPrice());
-		plan.setDataPerDay(newPlanRequest.getDataPerDay());
-		plan.setCalls(newPlanRequest.getCalls());
-		plan.setSms(newPlanRequest.getSms());
-		plan.setValidityDays(newPlanRequest.getValidityDays());
-
-		Plan savedPlan = planRepository.save(plan);
-		return new ResponseEntity<>(savedPlan, HttpStatus.CREATED);
+	public ResponseEntity<Plan> createPlan(@Valid @RequestBody NewPlanRequest request) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(planService.createPlan(request));
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Plan> updatePlan(@PathVariable Long id,
-			@Valid @RequestBody UpdatePlanRequest updatePlanRequest) {
-		return planRepository.findById(id).map(plan -> {
-			plan.setName(updatePlanRequest.getName());
-			plan.setCategory(updatePlanRequest.getCategory());
-			plan.setPrice(updatePlanRequest.getPrice());
-			plan.setDataPerDay(updatePlanRequest.getDataPerDay());
-			plan.setCalls(updatePlanRequest.getCalls());
-			plan.setSms(updatePlanRequest.getSms());
-			plan.setValidityDays(updatePlanRequest.getValidityDays());
-
-			Plan updatedPlan = planRepository.save(plan);
-			return ResponseEntity.ok(updatedPlan);
-		}).orElse(ResponseEntity.notFound().build());
+	public ResponseEntity<?> updatePlan(@PathVariable Long id, @Valid @RequestBody UpdatePlanRequest request) {
+		try {
+			return ResponseEntity.ok(planService.updatePlan(id, request));
+		} catch (RuntimeException e) {
+			return ResponseEntity.notFound().build();
+		}
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deletePlan(@PathVariable Long id) {
-		return planRepository.findById(id).map(plan -> {
-			planRepository.deleteById(id);
-			return ResponseEntity.noContent().<Void>build();
-		}).orElse(ResponseEntity.notFound().build());
+		try {
+			planService.deletePlan(id);
+			return ResponseEntity.noContent().build();
+		} catch (RuntimeException e) {
+			return ResponseEntity.notFound().build();
+		}
 	}
 }

@@ -10,8 +10,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Component
 public class RateLimiter {
 	private final Map<String, RequestCount> requestCounts = new ConcurrentHashMap<>();
-	private static final int MAX_REQUESTS = 5; // 5 requests per minute
-	private static final long WINDOW_SECONDS = 60; // 1 minute window
+	private static final int MAX_REQUESTS = 5;
+	private static final long WINDOW_SECONDS = 60;
 
 	private static class RequestCount {
 		AtomicInteger count;
@@ -28,13 +28,11 @@ public class RateLimiter {
 
 		synchronized (requestCount) {
 			Instant now = Instant.now();
-			// Reset if window has expired
 			if (now.isAfter(requestCount.windowStart.plusSeconds(WINDOW_SECONDS))) {
 				requestCount.count.set(0);
 				requestCount.windowStart = now;
 			}
 
-			// Check if request is allowed
 			if (requestCount.count.get() >= MAX_REQUESTS) {
 				return false;
 			}

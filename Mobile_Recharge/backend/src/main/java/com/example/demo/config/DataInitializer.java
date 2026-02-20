@@ -18,13 +18,11 @@ public class DataInitializer implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-
 		if (adminRepository.count() == 0) {
 			Admin admin = new Admin();
 			admin.setUsername("admin");
 			admin.setPassword(passwordEncoder.encode("Admin@123"));
 			adminRepository.save(admin);
-			System.out.println("Initial admin created with username: admin");
 		}
 	}
 }
